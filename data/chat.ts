@@ -3,8 +3,8 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { auth } from "@/auth";
-import prisma from "@lib/prisma";
-import redis from "@lib/redis";
+import prisma from "@/lib/prisma";
+import redis from "@/lib/redis";
 
 export async function removeChat({ id, path }: { id: string; path: string }) {
   const session = await auth();

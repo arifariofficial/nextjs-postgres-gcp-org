@@ -2,8 +2,8 @@
 
 import { signIn } from "next-auth/react";
 import { useState } from "react";
-import { Button } from "@components/ui/button";
-import { FacebookIcon, GoogleIcon, IconSpinner } from "@components/ui/icons";
+import { Button } from "@/components/ui/button";
+import { FacebookIcon, GoogleIcon, IconSpinner } from "@/components/ui/icons";
 import { Typography } from "@mui/material";
 
 export const Social = () => {

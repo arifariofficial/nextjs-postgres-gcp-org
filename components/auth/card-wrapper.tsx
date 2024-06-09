@@ -5,7 +5,7 @@ import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
 import { BackBotton } from "./back-button";
 import { Header } from "./header";
 import { Social } from "./social";
-import { cn } from "@lib/utils";
+import { cn } from "@/lib/utils";
 
 interface CardWrapperProps {
   children: React.ReactNode;
@@ -27,7 +27,7 @@ export const CardWrapper = ({
   return (
     <Card
       className={cn(
-        "h-[calc(100vh-150px)]flex -mt-16 w-full  max-w-sm rounded-sm bg-background  px-5 md:border md:border-border/30 md:px-7",
+        "h-[calc(100vh-150px)]flex -mt-16 w-full max-w-sm rounded-sm bg-background px-5 md:border md:border-border/30 md:px-7",
         className,
       )}
     >

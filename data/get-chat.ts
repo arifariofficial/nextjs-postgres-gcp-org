@@ -1,8 +1,8 @@
 "use server";
 
-import prisma from "@lib/prisma";
-import redis from "@lib/redis";
-import { Chat } from "@lib/types";
+import prisma from "@/lib/prisma";
+import redis from "@/lib/redis";
+import { Chat } from "@/lib/types";
 export async function getChats(userId?: string | null): Promise<Chat[]> {
   if (!userId) {
     console.log("No user ID provided.");

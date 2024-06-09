@@ -1,7 +1,7 @@
 "use server";
 
-import prisma from "@lib/prisma";
-import redis from "@lib/redis";
+import prisma from "@/lib/prisma";
+import redis from "@/lib/redis";
 import { auth } from "@/auth";
 
 export async function shareChat(id: string) {
