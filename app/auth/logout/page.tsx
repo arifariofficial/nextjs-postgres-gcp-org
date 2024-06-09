@@ -1,4 +1,4 @@
-import { LoginForm } from "@components/auth/login-form";
+import { LoginForm } from "@/components/auth/login-form";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -7,6 +7,6 @@ export const metadata: Metadata = {
   icons: "/favicon.ico",
 };
 
-export default function LogotPage() {
+export default function LogoutPage() {
   return <LoginForm headerLabel="Logged Out Successfully" />;
 }

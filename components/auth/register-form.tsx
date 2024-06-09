@@ -6,7 +6,6 @@ import * as z from "zod";
 import { RegisterSchema } from "@/lib/Schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem } from "../ui/form";
-import { FormError } from "../form-error";
 import { useState, useTransition } from "react";
 import { register } from "@/actions/register";
 import {
@@ -18,9 +17,10 @@ import {
 } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { getMessageFromCode } from "@lib/utils";
-import { FormSucccess } from "@components/form-success";
-import { Button } from "@components/ui/button";
+import { getMessageFromCode } from "@/lib/utils";
+import { FormSucccess } from "@/components/form-success";
+import { Button } from "@/components/ui/button";
+import { FormError } from "../form-error";
 
 export const RegisterForm = () => {
   const [isPending, startTransition] = useTransition();

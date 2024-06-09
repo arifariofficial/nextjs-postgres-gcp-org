@@ -1,6 +1,6 @@
 "use server";
 
-import { auth } from "@auth";
+import { auth } from "@/auth";
 import axios from "axios";
 import { checkBalance } from "../data/balance";
 

@@ -22,7 +22,7 @@ const buttonVariants = cva(
 
         link: "text-primary underline-offset-4 hover:underline",
 
-        nav: "bg-inherit text-foregroundNav hover:bg-primary-hover active:bg-inherit active:text-foregroundNav focus-visible:ring-0 hover:text-foregroundNav",
+        nav: "bg-inherit text-foreground hover:bg-muted active:bg-inherit active:text-foreground focus-visible:ring-0 hover:text-foreground",
       },
       size: {
         default: "h-9 px-4 py-2",
