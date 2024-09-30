@@ -2,9 +2,9 @@ import { notFound, redirect } from "next/navigation";
 import { auth } from "@/auth";
 import { AI } from "@/lib/chat/actions";
 import { Session } from "next-auth";
-import { getChat } from "@data/get-chat";
+import { getChat } from "@/data/get-chat";
 
-import Chat from "@components/chat/chat";
+import Chat from "@/components/chat/chat";
 
 export interface ChatPageProps {
   params: {

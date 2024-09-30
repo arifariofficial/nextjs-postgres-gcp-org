@@ -16,9 +16,9 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { IconSpinner } from "@components/ui/icons";
+import { IconSpinner } from "@/components/ui/icons";
 import { useRouter } from "next/navigation";
-import { useChats } from "@lib/hooks/useChats";
+import { useChats } from "@/lib/hooks/useChats";
 import { Session } from "next-auth";
 
 interface ClearHistoryProps {
@@ -57,7 +57,7 @@ export function ClearHistory({
           <AlertDialogCancel disabled={isPending}>Cancel</AlertDialogCancel>
           <AlertDialogAction
             disabled={isPending}
-            onClick={(event) => {
+            onClick={(event: { preventDefault: () => void }) => {
               event.preventDefault();
               startTransition(async () => {
                 const result = await clearChats();

@@ -1,11 +1,11 @@
-import { FooterText } from "@components/chat/footer";
+import { FooterText } from "@/components/chat/footer";
 import { useActions, useUIState } from "ai/rsc";
 import { UserMessage } from "./message";
 import { PromptForm } from "./prompt-form";
-import { AI } from "@lib/chat/actions";
-import { nanoid } from "@lib/utils";
-import { useAppDispatch } from "@lib/store/hook";
-import { decrement } from "@lib/store/balanceSlice";
+import { AI } from "@/lib/chat/actions";
+import { nanoid } from "@/lib/utils";
+import { useAppDispatch } from "@/lib/store/hook";
+import { decrement } from "@/lib/store/balanceSlice";
 import { useState } from "react";
 
 export interface ChatPanelProps {
@@ -38,7 +38,7 @@ export function ChatPanel({ input, setInput }: ChatPanelProps) {
   return (
     <div className="mx-auto flex size-full max-w-3xl flex-col sm:pr-4">
       {messages.length === 0 && (
-        <div className="mb-2 flex w-full flex-row gap-2 px-4  text-center sm:mb-4">
+        <div className="mb-2 flex w-full flex-row gap-2 px-4 text-center sm:mb-4">
           {exampleMessages.map((example, index) => (
             <div
               key={example.heading}

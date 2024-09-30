@@ -1,7 +1,6 @@
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "../mode-toggle";
 import UserButtonDesktop from "./user-button-desktop";
-import { auth } from "@/auth";
 import { Session } from "next-auth";
 
 interface NavItemsMRightrops {

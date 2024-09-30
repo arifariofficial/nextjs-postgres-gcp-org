@@ -22,9 +22,9 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { IconShare, IconSpinner, IconTrash } from "@components/ui/icons";
+import { IconShare, IconSpinner, IconTrash } from "@/components/ui/icons";
 import { ChatShareDialog } from "./chat-share-dialog";
-import { useChats } from "@lib/hooks/useChats";
+import { useChats } from "@/lib/hooks/useChats";
 import { useSession } from "next-auth/react";
 
 interface SidebarActionsProps {
@@ -97,7 +97,7 @@ export function SidebarActions({
             </AlertDialogCancel>
             <AlertDialogAction
               disabled={isRemovePending}
-              onClick={(event) => {
+              onClick={(event: { preventDefault: () => void }) => {
                 event.preventDefault();
 
                 startRemoveTransition(async () => {

@@ -1,9 +1,9 @@
 "use client";
 
-import ChatModal from "@components/chat/chat-modal";
-import { SidebarDesktop } from "@components/chat/sidebar-desktop";
-import { SidebarToggle } from "@components/chat/sidebar-toggle";
-import { useSidebar } from "@lib/hooks/use-sidebar";
+import ChatModal from "@/components/chat/chat-modal";
+import { SidebarDesktop } from "@/components/chat/sidebar-desktop";
+import { SidebarToggle } from "@/components/chat/sidebar-toggle";
+import { useSidebar } from "@/lib/hooks/use-sidebar";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -38,7 +38,7 @@ export default function ChatLayout({ children }: ChatLayoutProps) {
   return (
     <div className="mx-auto flex size-full flex-row">
       <div
-        className={`hidden items-center bg-muted duration-300 ease-in-out md:block ${isSidebarOpen ? "w-64 md:w-72 lg:w-80" : "w-0"} overflow-hidden `}
+        className={`hidden items-center bg-muted duration-300 ease-in-out md:block ${isSidebarOpen ? "w-64 md:w-72 lg:w-80" : "w-0"} overflow-hidden`}
       >
         <SidebarDesktop />
       </div>
