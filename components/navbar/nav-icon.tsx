@@ -8,8 +8,8 @@ interface NavIconProps {
 function NavIcon({ className }: NavIconProps) {
   return (
     <div className={cn(className)}>
-      <Link href="/" className="p-3 font-serif text-xl font-semibold italic">
-        ARIFUL
+      <Link href="/" className="p-3 font-serif text-xl font-semibold">
+        ariful.org
       </Link>
     </div>
   );
