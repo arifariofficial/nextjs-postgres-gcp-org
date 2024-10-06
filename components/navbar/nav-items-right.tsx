@@ -10,9 +10,9 @@ interface NavItemsMRightrops {
 
 async function NavItemsRight({ className, session }: NavItemsMRightrops) {
   return (
-    <div className={cn(className, "mr-1 flex h-full items-center")}>
+    <div className={cn(className, "mr-1 hidden h-full items-center sm:flex")}>
       <ModeToggle />
-      <UserButtonDesktop session={session} className="hidden h-full sm:flex" />
+      <UserButtonDesktop session={session} className="h-full" />
     </div>
   );
 }

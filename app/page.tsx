@@ -4,7 +4,7 @@ import { FaGithub } from "react-icons/fa";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center text-foreground transition-colors duration-300">
+    <div className="flex min-h-screen flex-col items-center justify-center px-4 text-foreground transition-colors duration-300">
       <Image
         src={Sky}
         alt="background-image"
@@ -12,7 +12,7 @@ export default function Home() {
         objectFit="cover"
         className="dark:hidden"
       />
-      <div className="animate-fade-in max-w-3xl rounded-lg bg-card p-8 text-card-foreground shadow-lg">
+      <div className="animate-fade-in max-w-3xl rounded-lg bg-background/60 p-8 text-card-foreground shadow-lg">
         <h1 className="animate-fade-in mb-6 text-center text-5xl font-bold">
           Welcome to <span className="text-foreground/70">ariful.org</span>
         </h1>

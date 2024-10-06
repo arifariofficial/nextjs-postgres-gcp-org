@@ -39,7 +39,7 @@ export default function UserButtonDesktop({
                     alt={session.user.name || "Name not available"}
                   />
                 )}
-                <AvatarFallback className="size-8">
+                <AvatarFallback className="size-ful border">
                   <AccountCircleIcon />
                 </AvatarFallback>
               </Avatar>
