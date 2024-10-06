@@ -23,7 +23,7 @@ export function ModeToggle() {
   const isSystemMode = theme === "system";
 
   return (
-    <DropdownMenu>
+    <DropdownMenu dir="ltr">
       <DropdownMenuTrigger asChild>
         <Button variant="nav" className="h-full">
           <SunIcon className="size-[1.3rem] rotate-0 scale-100 font-bold transition-all dark:-rotate-90 dark:scale-0" />
@@ -36,10 +36,6 @@ export function ModeToggle() {
         align="center"
         className="w-56 border border-border/30"
       >
-        <DropdownMenuLabel className="flex size-full items-center justify-center">
-          Theme
-        </DropdownMenuLabel>
-        <DropdownMenuSeparator />
         <DropdownMenuCheckboxItem
           checked={isLightMode}
           onCheckedChange={() => setTheme("light")}
