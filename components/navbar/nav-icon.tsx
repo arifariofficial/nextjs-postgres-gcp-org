@@ -8,7 +8,9 @@ interface NavIconProps {
 function NavIcon({ className }: NavIconProps) {
   return (
     <div className={cn(className)}>
-      <Link href="/">Ariful</Link>
+      <Link href="/" className="p-3 font-serif text-xl font-semibold italic">
+        ARIFUL
+      </Link>
     </div>
   );
 }
