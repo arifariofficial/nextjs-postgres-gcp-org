@@ -1,4 +1,4 @@
-import { SIPEChunk, SIPEEssay, SIPEJSON } from "@types";
+import { SIPEChunk, SIPEEssay, SIPEJSON } from "@/types";
 import axios from "axios";
 import * as cheerio from "cheerio";
 import { encode } from "gpt-3-encoder";

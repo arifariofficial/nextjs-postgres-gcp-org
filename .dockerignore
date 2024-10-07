@@ -1,0 +1,35 @@
+# Node.js dependencies
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Local development directories
+.next
+out
+dist
+
+# Logs
+logs
+*.log
+*.log.*
+
+# Temporary files
+*.swp
+*.swo
+*.tmp
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Docker-related files
+Dockerfile
+docker-compose.yml
+
+# Git-related files
+.git
+.gitignore
+
+
+# Build outputs
+build
