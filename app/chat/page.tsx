@@ -6,7 +6,7 @@ import { Metadata } from "next";
 import { Session } from "next-auth";
 
 export const metadata: Metadata = {
-  title: "SIPE | Chat",
+  title: "Ariful | Chat",
   description: "Legal AI assistant",
   icons: "/favicon.ico",
 };

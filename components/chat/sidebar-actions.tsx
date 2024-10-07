@@ -46,7 +46,7 @@ export function SidebarActions({
 
   return (
     <>
-      <div className="">
+      <div className="space-x-2 pr-2">
         <Tooltip>
           <TooltipTrigger asChild>
             <Button

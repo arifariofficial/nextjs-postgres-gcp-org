@@ -27,8 +27,8 @@ export function ChatHistory({ session }: { session: Session | null }) {
       <div className="flex items-center p-4">
         <h4 className="text-sm font-medium">Chat History</h4>
         <Button
-          variant="nav"
-          className="mx-8 bg-inherit"
+          variant="outline"
+          className="mx-8 size-7 p-0"
           onClick={() => session?.user?.id && loadChats(session?.user?.id)}
         >
           <IconRefresh />
