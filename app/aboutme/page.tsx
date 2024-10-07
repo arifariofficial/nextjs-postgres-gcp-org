@@ -6,6 +6,6 @@ export const metadata: Metadata = {
   icons: "/favicon.ico",
 };
 const AboutMe = () => {
-  return <div>Here is something about me</div>;
+  return <div>Here is something about me more</div>;
 };
 export default AboutMe;
