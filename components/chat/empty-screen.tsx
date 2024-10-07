@@ -13,7 +13,8 @@ export function EmptyScreen() {
         </h1>
         <p className="leading-normal text-muted-foreground">
           If you want to learn about your rights and the benefits you can
-          receive from an insurance company or from Kela, use this application
+          receive from an insurance company or from Kela when you have an
+          accident, use this application.
           <span className="whitespace-nowrap"> (In Finnish)</span>
         </p>
       </div>

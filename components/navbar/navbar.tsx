@@ -11,7 +11,7 @@ export default async function NavBar() {
     <nav className="sticky top-0 z-50 flex border-b border-b-foreground/10 bg-background text-foreground">
       <Container className="flex h-14 items-center justify-between">
         <NavIcon />
-        <NavItemsMiddle className="hidden h-full items-center sm:flex" />
+        <NavItemsMiddle className="flex h-full w-full items-center justify-end pr-7" />
         <NavItemsRight session={session} />
         <UserButtonMobile session={session} className="flex h-full sm:hidden" />
       </Container>
