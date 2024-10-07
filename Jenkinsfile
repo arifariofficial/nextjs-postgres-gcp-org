@@ -45,6 +45,8 @@ pipeline {
                 script {
                     // Ensure the directory path is correct based on the debug output from the previous stage
                     sh '''
+                        cd 
+                        cd ariful-org-nextjs-prisma
                         git pull origin production
                         docker-compose down
                         docker system prune -f
