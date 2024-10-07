@@ -4,11 +4,22 @@ pipeline {
         stage('Pull Code') {
             steps {
                 script {
-                    // Pull the latest code from the Git repository
-                    git branch: 'production', url: 'https://github.com/arifariofficial/ariful-org-nextjs-prisma'
+                    // Check if the repository already exists
+                    if (fileExists('ariful-org-nextjs-prisma')) {
+                        // Navigate to the repository and pull the latest code
+                        dir('ariful-org-nextjs-prisma') {
+                            sh 'git pull origin production'
+                        }
+                    } else {
+                        // Optional: You could print a message if the directory doesn't exist
+                        echo "Repository directory not found. Exiting."
+                        currentBuild.result = 'FAILURE'
+                        return
+                    }
 
-                    // Check if the current branch is 'production'
-                    if (env.BRANCH_NAME != 'production') {
+                    // Ensure we are on the 'production' branch
+                    def branch = sh(script: "cd ariful-org-nextjs-prisma && git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
+                    if (branch != 'production') {
                         echo "Skipping build. Current branch is not 'production'."
                         currentBuild.result = 'SUCCESS'
                         return
@@ -17,7 +28,7 @@ pipeline {
             }
         }
 
-        stage('Clean docker images') {
+        stage('Clean Docker Images') {
             when {
                 expression { env.BRANCH_NAME == 'production' }
             }
