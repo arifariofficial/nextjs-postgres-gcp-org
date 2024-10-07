@@ -24,7 +24,7 @@ pipeline {
             
             steps {
                 sh 'cd ariful-org-nextjs-prisma'
-                sh 'docker compose down'
+                sh 'docker-compose down'
                 sh 'docker system prune -f'
                 sh 'docker volume prune -f'
                 sh 'docker image prune -f'
@@ -37,8 +37,8 @@ pipeline {
             }
 
             steps {
-                sh 'docker compose build'
-                sh 'docker compose up -d'
+                sh 'docker-compose build'
+                sh 'docker-compose up -d'
             }
         }
 }
