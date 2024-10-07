@@ -37,7 +37,7 @@ export default function UserButtonMobile({
         <Sheet>
           <SheetTrigger
             asChild
-            className="text-foregroundNav flex items-center justify-center !px-2"
+            className="flex items-center justify-center !px-2 text-foregroundNav"
           >
             <Button variant="nav" className="h-full">
               <Avatar className="size-7">
@@ -82,7 +82,20 @@ export default function UserButtonMobile({
                 className="flex w-full justify-between p-8"
               >
                 <Link className="" href="/about">
-                  <p className="text-2xl font-bold">About</p>
+                  <p className="text-2xl font-bold">About Me</p>
+                  <IconAboutUs />
+                </Link>
+              </Button>
+            </SheetClose>
+            <Separator />
+            <SheetClose asChild>
+              <Button
+                variant="ghost"
+                asChild
+                className="flex w-full justify-between p-8"
+              >
+                <Link className="" href="/about">
+                  <p className="text-2xl font-bold">Projects</p>
                   <IconAboutUs />
                 </Link>
               </Button>

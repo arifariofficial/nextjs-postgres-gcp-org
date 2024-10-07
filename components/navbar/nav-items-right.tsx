@@ -3,12 +3,12 @@ import { ModeToggle } from "../mode-toggle";
 import UserButtonDesktop from "./user-button-desktop";
 import { Session } from "next-auth";
 
-interface NavItemsMRightrops {
+interface NavItemsMRightProps {
   session: Session | null;
   className?: string;
 }
 
-async function NavItemsRight({ className, session }: NavItemsMRightrops) {
+async function NavItemsRight({ className, session }: NavItemsMRightProps) {
   return (
     <div className={cn(className, "mr-1 hidden h-full items-center sm:flex")}>
       <ModeToggle />

@@ -1,5 +1,6 @@
 import ChatPageSkeleton from "@/components/skeletons/ChatSkeleton";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface ChatModalProps {
   showModal: boolean;
@@ -24,6 +25,19 @@ export default function ChatModal({
             >
               OK
             </Button>
+            <div>
+              <p className="text-sm">
+                Create a free Account. Click{" "}
+                <Link
+                  href="/auth/register"
+                  className="text-foreground hover:text-foreground/60"
+                >
+                  <span className="font-extrabold text-blue-900 hover:cursor-pointer dark:text-green-900">
+                    Here
+                  </span>
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
       )}
