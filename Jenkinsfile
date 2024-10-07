@@ -4,6 +4,14 @@ pipeline {
         githubPush()
     }
     stages {
+        stage('Check Workspace') {
+            steps {
+                script {
+                    // List files in the current workspace to debug the issue
+                    sh 'pwd'
+                }
+            }
+        }
         stage('Checkout Code') {
             steps {
                 checkout scm
@@ -13,14 +21,6 @@ pipeline {
             }
         }
 
-        stage('Check Workspace') {
-            steps {
-                script {
-                    // List files in the current workspace to debug the issue
-                    sh 'ls -al'
-                }
-            }
-        }
 
         stage('Check Branch') {
             steps {
@@ -45,9 +45,11 @@ pipeline {
                 script {
                     // Ensure the directory path is correct based on the debug output from the previous stage
                     sh '''
-                        cd ariful-org-nextjs-prisma
+                        git pull origin production
                         docker-compose down
-                        docker system prune -af --volumes
+                        docker system prune -f
+                        docker volume prune -f
+                        docker image prune -f
                     '''
                 }
             }
@@ -60,7 +62,6 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        cd ariful-org-nextjs-prisma
                         docker-compose build
                         docker-compose up -d
                     '''
