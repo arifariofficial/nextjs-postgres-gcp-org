@@ -6,12 +6,18 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                // Checkout the code from the repository
                 checkout scm
-                
-                // Ensure we are on the correct branch (force checkout to branch)
                 script {
-                    sh 'git checkout production' // replace 'production' with the branch you want to use
+                    sh 'git checkout production'
+                }
+            }
+        }
+
+        stage('Check Workspace') {
+            steps {
+                script {
+                    // List files in the current workspace to debug the issue
+                    sh 'ls -al'
                 }
             }
         }
@@ -19,7 +25,6 @@ pipeline {
         stage('Check Branch') {
             steps {
                 script {
-                    // Manually detect branch name using git
                     def branch = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
                     echo "Branch detected: ${branch}"
 
@@ -38,6 +43,7 @@ pipeline {
             }
             steps {
                 script {
+                    // Ensure the directory path is correct based on the debug output from the previous stage
                     sh '''
                         cd ariful-org-nextjs-prisma
                         docker-compose down
