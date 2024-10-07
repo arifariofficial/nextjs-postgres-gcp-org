@@ -45,8 +45,7 @@ pipeline {
                 script {
                     // Ensure the directory path is correct based on the debug output from the previous stage
                     sh '''
-                        cd 
-                        cd ariful-org-nextjs-prisma
+                        cd /home/sipeai18/ariful-org-nextjs-prisma
                         git pull origin production
                         docker-compose down
                         docker system prune -f
@@ -64,6 +63,7 @@ pipeline {
             steps {
                 script {
                     sh '''
+                        cd /home/sipeai18/ariful-org-nextjs-prisma
                         docker-compose build
                         docker-compose up -d
                     '''
