@@ -29,6 +29,11 @@ export function SidebarToggle() {
             <ChevronRight className="size-7" strokeWidth={4} />
           )}
           <span className="sr-only">Toggle Sidebar</span>
+          <div
+            className={` ${isSidebarOpen ? "hidden" : ""} inline-block rotate-180 cursor-default justify-center text-sm text-foreground/70 [writing-mode:vertical-lr]`}
+          >
+            Chat History
+          </div>
         </Button>
       </TooltipTrigger>
       <TooltipContent side="right">
