@@ -1,21 +1,30 @@
 pipeline {
     agent any
     triggers {
-        githubPush() // This will trigger the job when a push happens
+        githubPush()
     }
     stages {
-        stage('Debug Branch') {
+        stage('Checkout Code') {
             steps {
-                script {
-                    echo "Detected branch: ${env.BRANCH_NAME}"
-                }
-            }   
+                // Explicitly checking out the production branch (or whatever branch is being pushed)
+                checkout([
+                    $class: 'GitSCM', 
+                    branches: [[name: '*/production']],  // Use production branch here
+                    doGenerateSubmoduleConfigurations: false, 
+                    extensions: [], 
+                    submoduleCfg: [], 
+                    userRemoteConfigs: [[url: 'https://github.com/arifariofficial/ariful-org-nextjs-prisma']]
+                ])
+            }
         }
+
         stage('Check Branch') {
             steps {
                 script {
+                    // Manually detect branch name using git
                     def branch = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
                     echo "Branch detected: ${branch}"
+
                     if (branch != 'production') {
                         echo "Skipping build. Current branch is not 'production'."
                         currentBuild.result = 'SUCCESS'
@@ -24,18 +33,17 @@ pipeline {
                 }
             }
         }
+
         stage('Clean Docker Images') {
             when {
-                expression { env.BRANCH_NAME == 'production' }
+                expression { sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim() == 'production' }
             }
             steps {
                 script {
-                    // Navigate to the directory and clean Docker resources
                     sh '''
                         cd ariful-org-nextjs-prisma
                         docker-compose down
                         docker system prune -af --volumes
-                        docker image prune -f
                     '''
                 }
             }
@@ -43,11 +51,10 @@ pipeline {
 
         stage('Docker Build and Up') {
             when {
-                expression { env.BRANCH_NAME == 'production' }
+                expression { sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim() == 'production' }
             }
             steps {
                 script {
-                    // Build and bring up the Docker containers
                     sh '''
                         cd ariful-org-nextjs-prisma
                         docker-compose build
