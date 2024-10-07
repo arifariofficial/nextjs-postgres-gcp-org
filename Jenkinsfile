@@ -6,15 +6,13 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                // Explicitly checking out the production branch (or whatever branch is being pushed)
-                checkout([
-                    $class: 'GitSCM', 
-                    branches: [[name: '*/production']],  // Use production branch here
-                    doGenerateSubmoduleConfigurations: false, 
-                    extensions: [], 
-                    submoduleCfg: [], 
-                    userRemoteConfigs: [[url: 'https://github.com/arifariofficial/ariful-org-nextjs-prisma']]
-                ])
+                // Checkout the code from the repository
+                checkout scm
+                
+                // Ensure we are on the correct branch (force checkout to branch)
+                script {
+                    sh 'git checkout production' // replace 'production' with the branch you want to use
+                }
             }
         }
 
