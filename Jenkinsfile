@@ -26,8 +26,7 @@ pipeline {
                     sh '''
                         cd ariful-org-nextjs-prisma
                         docker-compose down
-                        docker system prune -f
-                        docker volume prune -f
+                        docker system prune -af --volumes
                         docker image prune -f
                     '''
                 }
