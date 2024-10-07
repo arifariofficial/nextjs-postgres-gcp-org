@@ -45,9 +45,6 @@ pipeline {
                 script {
                     // Ensure the directory path is correct based on the debug output from the previous stage
                     sh '''
-                     # Mark directory as safe for Git operations
-                        git config --global --add safe.directory /home/sipeai18/ariful-org-nextjs-prisma
-
                         # Navigate to the project directory
                         cd /home/sipeai18/ariful-org-nextjs-prisma
 
