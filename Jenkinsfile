@@ -37,7 +37,7 @@ pipeline {
             }
         }
 
-        stage('Clean Docker Images and git pull') {
+        stage('Pull Clean Build Up') {
             when {
                 expression { sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim() == 'production' }
             }
@@ -58,19 +58,8 @@ pipeline {
                         docker system prune -f
                         docker volume prune -f
                         docker image prune -f
-                    '''
-                }
-            }
-        }
 
-        stage('Docker Build and Up') {
-            when {
-                expression { sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim() == 'production' }
-            }
-            steps {
-                script {
-                    sh '''
-                        cd /home/sipeai18/ariful-org-nextjs-prisma
+                        # docker compose build and up
                         docker-compose build
                         docker-compose up -d
                     '''
