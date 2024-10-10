@@ -7,7 +7,7 @@ pipeline {
                 [key: 'DOCKER_TAG', value: '$.push_data.tag']
             ],
             causeString: 'Triggered by Docker Hub webhook: $DOCKER_REPO:$DOCKER_TAG',
-            token: 'JENKINS_URL/job/docker-hub/build?token=DOCKER_HUB',
+            token: 'DOCKER_HUB',
             printContributedVariables: true,
             printPostContent: true,
             silentResponse: false
@@ -18,7 +18,26 @@ pipeline {
             steps {
                 script {
                     echo "Deploying Docker image: ${DOCKER_REPO}:${DOCKER_TAG}"
-                    // Add steps for pulling and deploying the Docker image
+
+                    sh '''
+                        # Navigate to the project directory
+                        cd /home/sipeai18/ariful-org-nextjs-prisma
+
+                        # Pull latest changes from production
+                        git pull origin production
+
+                        # Bring down Docker containers
+                        docker-compose down
+
+                        # Clean up unused Docker resources
+                        docker system prune -f
+                        docker volume prune -f
+                        docker image prune -f
+
+                        # docker compose build and up
+                        # docker-compose build
+                        docker-compose up -d
+                    '''
                 }
             }
         }
