@@ -24,7 +24,7 @@ pipeline {
                         cd /home/sipeai18/ariful-org-nextjs-prisma
 
                         # Pull latest changes from production
-                        git pull origin production
+                        git pull origin main
 
                         # Bring down Docker containers
                         docker-compose down
