@@ -13,6 +13,11 @@ pipeline {
             silentResponse: false
         )
     }
+
+    environment {
+        PROJECT_PATH = '/home/sipeai18/ariful-org-nextjs-prisma'
+    }
+
     stages {
         stage('Deploy Docker Image') {
             steps {
