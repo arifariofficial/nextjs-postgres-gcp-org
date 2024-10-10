@@ -4,7 +4,9 @@ import { useSidebar } from "@/lib/hooks/use-sidebar";
 import { cn } from "@/lib/utils";
 import { ComponentProps, useEffect, useState } from "react";
 
-export interface SidebarProps extends ComponentProps<"div"> {}
+export interface SidebarProps extends ComponentProps<"div"> {
+  customProp?: string;
+}
 
 export function Sidebar({ className, children }: SidebarProps) {
   const { isSidebarOpen, isLoading } = useSidebar();
@@ -29,10 +31,7 @@ export function Sidebar({ className, children }: SidebarProps) {
   return (
     <div
       data-state={isSidebarOpen && !isLoading ? "open" : "closed"}
-      className={cn(
-        className,
-        "peer  flex size-full flex-col dark:bg-zinc-950",
-      )}
+      className={cn(className, "peer flex size-full flex-col dark:bg-zinc-950")}
     >
       {children}
     </div>

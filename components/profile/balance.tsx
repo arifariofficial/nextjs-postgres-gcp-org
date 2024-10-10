@@ -56,6 +56,7 @@ export default function Balance() {
         });
       }
     } catch (error) {
+      console.error("Error purchasing credits:", error);
       toast({
         variant: "destructive",
         description: "Something went wrong. Please try again later.",

@@ -13,14 +13,15 @@ WORKDIR /app
 
 # Copy package files and install dependencies
 COPY package.json package-lock.json* ./
-RUN npm install
+ENV NODE_ENV=production
+RUN npm install sharp && npm install
 
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
 
 # Update npm to the latest version
-RUN npm install -g npm@latest
+RUN npm install -g npm@10.9.0
 
 # Copy node_modules from the deps stage
 COPY --from=deps /app/node_modules ./node_modules
