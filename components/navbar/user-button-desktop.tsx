@@ -94,7 +94,7 @@ export default function UserButtonDesktop({
         className="flex h-full flex-row items-center gap-2 font-bold"
       >
         <LockIcon className="text-foreground" />
-        <p className="text-foreground">Log in</p>
+        <p className="text-foreground">Log In</p>
       </Link>
     </Button>
   );

@@ -2,7 +2,7 @@ import Security from "@/components/profile/security";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "SIPE | Security",
+  title: "Ariful | Security",
   description: "Security Settings",
   icons: "/favicon.ico",
 };

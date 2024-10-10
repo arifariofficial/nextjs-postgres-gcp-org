@@ -39,7 +39,7 @@ export default async function RootLayout({
           inter.className,
           GeistSans.variable,
           GeistMono.variable,
-          "bg-background text-foreground antialiased",
+          "antialiased",
         )}
       >
         <Toaster position="top-center" />

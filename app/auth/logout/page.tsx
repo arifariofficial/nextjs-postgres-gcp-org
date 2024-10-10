@@ -2,7 +2,7 @@ import { LoginForm } from "@/components/auth/login-form";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "SIPE | Logged out",
+  title: "Ariful | Logged out",
   description: "Please log in again to continue",
   icons: "/favicon.ico",
 };
