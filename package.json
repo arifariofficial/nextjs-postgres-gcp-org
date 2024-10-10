@@ -5,10 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "docker": "docker system prune -f && docker build -t arifariofficial/ariful-org .",
+    "docker": "docker system prune -f && docker build -t arifariofficial/ariful-org . && docker push arifariofficial/ariful-org",
     "analyze": "ANALYZE=true next build",
-    "build": "next build",
-    "start": "node .next/standalone/server.js",
+    "start": "next start",
     "lint": "next lint",
     "scrape": "tsx scripts/scrape.ts",
     "embed": "tsx scripts/embed.ts"

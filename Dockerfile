@@ -1,7 +1,10 @@
 # Use the latest Node.js Alpine as the base image
 FROM node:alpine AS base
 
-# Use the base image to install system dependencies
+# Install system dependencies and setup environment
+RUN apk add --no-cache libc6-compat
+
+# Use the base image to install dependencies
 FROM base AS deps
 
 # Set the working directory
@@ -11,7 +14,7 @@ WORKDIR /app
 COPY package.json package-lock.json* ./
 RUN npm install 
 
-# Rebuild the source code only when needed
+# Build the source code
 FROM base AS builder
 WORKDIR /app
 
@@ -24,10 +27,10 @@ COPY . .
 # Generate Prisma client
 RUN npx prisma generate
 
-# Build the application using npm
+# Build the application and generate the standalone output
 RUN npm run build
 
-# Production image, copy all the files and run next
+# Production image, copy all the necessary files
 FROM base AS runner
 WORKDIR /app
 
@@ -43,13 +46,8 @@ RUN adduser --system --uid 1001 nextjs
 # Copy necessary files and set permissions
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=builder /app/public ./public
-COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
-COPY --from=builder /app/prisma ./prisma
 
-# Set the correct permission for prerender cache
-RUN mkdir .next
-RUN chown nextjs:nodejs .next
-
+# Copy standalone and static Next.js build outputs
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
