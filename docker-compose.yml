@@ -4,6 +4,7 @@ services:
     #   context: .
     #   dockerfile: Dockerfile
 
+    # using docker registry
     image: arifariofficial/ariful-org
     environment:
       - NODE_ENV=production
