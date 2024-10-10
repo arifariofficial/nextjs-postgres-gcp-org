@@ -34,13 +34,17 @@ WORKDIR /app
 # Set environment variables
 ENV NODE_ENV=production
 ENV PORT=3000
+ENV HOSTNAME=0.0.0.0
 
 # Create non-root user and group
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 # Copy necessary files and set permissions
+COPY --from=deps /app/node_modules ./node_modules
 COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
+COPY --from=builder /app/prisma ./prisma
 
 # Set the correct permission for prerender cache
 RUN mkdir .next
@@ -54,10 +58,6 @@ COPY --from=builder /app/prisma ./prisma
 
 # Switch to non-root user
 USER nextjs
-
-# Set environment variables
-ENV NODE_ENV=production
-ENV HOSTNAME=0.0.0.0
 
 # Expose the application port
 EXPOSE 3000
