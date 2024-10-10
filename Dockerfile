@@ -1,27 +1,19 @@
-# Use an official Node.js runtime as a parent image
-FROM node:18-alpine AS base
+# Use the latest Node.js Alpine as the base image
+FROM node:alpine AS base
 
 # Use the base image to install system dependencies
 FROM base AS deps
 
-# Install system dependencies
-RUN apk add --no-cache libc6-compat curl
-RUN apk add --no-cache bind-tools busybox-extras iputils
-
 # Set the working directory
 WORKDIR /app
 
-# Copy package files and install dependencies
+# Copy package files and install dependencies using npm
 COPY package.json package-lock.json* ./
-ENV NODE_ENV=production
-RUN npm install sharp && npm install
+RUN npm install 
 
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
-
-# Update npm to the latest version
-RUN npm install -g npm@10.9.0
 
 # Copy node_modules from the deps stage
 COPY --from=deps /app/node_modules ./node_modules
@@ -29,11 +21,10 @@ COPY --from=deps /app/node_modules ./node_modules
 # Copy all project files
 COPY . .
 
-
 # Generate Prisma client
 RUN npx prisma generate
 
-# Build the application
+# Build the application using npm
 RUN npm run build
 
 # Production image, copy all the files and run next
@@ -42,7 +33,7 @@ WORKDIR /app
 
 # Set environment variables
 ENV NODE_ENV=production
-ENV PORT 3000
+ENV PORT=3000
 
 # Create non-root user and group
 RUN addgroup --system --gid 1001 nodejs
@@ -64,12 +55,12 @@ COPY --from=builder /app/prisma ./prisma
 # Switch to non-root user
 USER nextjs
 
-
+# Set environment variables
+ENV NODE_ENV=production
+ENV HOSTNAME=0.0.0.0
 
 # Expose the application port
 EXPOSE 3000
 
 # Set the default command to run the application
-CMD HOSTNAME="0.0.0.0" node server.js
-
-
+CMD ["node", "server.js"]

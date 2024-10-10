@@ -1,8 +1,10 @@
 services:
   frontend:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+
+    image: arifariofficial/ariful-org
     environment:
       - NODE_ENV=production
       - AUTH_URL=https://ariful.org
