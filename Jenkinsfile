@@ -51,7 +51,7 @@ pipeline {
                         git pull origin production
 
                         # Bring down Docker containers
-                        docker-compose down
+                         docker-compose -f docker-compose-github.yml down
 
                         # Clean up unused Docker resources
                         docker system prune -f
@@ -59,8 +59,8 @@ pipeline {
                         docker image prune -f
 
                         # docker compose build and up
-                        # docker-compose build
-                        docker-compose up -d
+                        docker-compose -f docker-compose-github.yml up -d --build
+                        
                     '''
                 }
             }

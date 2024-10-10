@@ -8,7 +8,7 @@ interface NavItemsMRightProps {
   className?: string;
 }
 
-async function NavItemsRight({ className, session }: NavItemsMRightProps) {
+function NavItemsRight({ className, session }: NavItemsMRightProps) {
   return (
     <div className={cn(className, "mr-1 hidden h-full items-center sm:flex")}>
       <ModeToggle />

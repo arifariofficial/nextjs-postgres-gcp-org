@@ -2,7 +2,6 @@
 
 import prisma from "@/lib/prisma";
 import redis from "@/lib/redis";
-
 export async function getBalance(userId: string) {
   const cacheKey = `user:balance:${userId}`;
 
@@ -18,14 +17,20 @@ export async function getBalance(userId: string) {
     select: { balance: true },
   });
 
-  if (previousBalance === null) {
-    return { error: "User not found" };
+  // Ensure both user and balance exist
+  if (!previousBalance || previousBalance.balance === null) {
+    return { error: "User or balance not found" };
   }
 
   const balance = previousBalance.balance;
 
-  // Save the balance to Redis cache for 5 minutes
-  await redis?.setex(cacheKey, 5, balance.toString());
+  // Ensure the balance is a valid number before storing it in Redis
+  if (balance !== null && typeof balance === "number") {
+    // Save the balance to Redis cache for 5 minutes (300 seconds)
+    await redis?.setex(cacheKey, 300, balance.toString());
+  } else {
+    return { error: "Invalid balance" };
+  }
 
   return { balance };
 }
@@ -49,6 +54,7 @@ export async function updateBalance(balance: number, userId: string) {
     });
     return { success: true, message: "Balance updated successfully" };
   } catch (error) {
+    console.log("error updating balance:", error);
     return { success: true, balance: previousBalance.balance };
   }
 }
@@ -69,14 +75,18 @@ export async function checkBalance(userId: string) {
       select: { balance: true },
     });
 
-    if (previousBalance === null) {
+    if (previousBalance === null || previousBalance.balance === null) {
       return { error: "User not found" };
     }
 
     balance = previousBalance.balance;
 
-    // Store the balance in Redis cache with a short expiration time (e.g., 5 minutes)
-    await redis?.setex(cacheKey, 300, balance.toString());
+    if (balance !== null) {
+      // Store the balance in Redis cache with a short expiration time (e.g., 5 minutes)
+      await redis?.setex(cacheKey, 300, balance.toString());
+    } else {
+      return { error: "Balance is null" };
+    }
   }
 
   // Check if the balance is sufficient

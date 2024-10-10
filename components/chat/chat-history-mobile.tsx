@@ -7,7 +7,7 @@ import { SidebarList } from "@/components/chat/sidebar-list";
 import { buttonVariants } from "@/components/ui/button";
 import { IconPlus } from "@/components/ui/icons";
 
-export async function ChatHistoryMobile() {
+export function ChatHistoryMobile() {
   return (
     <div className="flex h-full flex-col">
       <div className="flex items-center justify-between p-4">

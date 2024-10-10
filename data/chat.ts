@@ -50,7 +50,11 @@ export async function clearChats() {
     where: { userId: session.user.id },
   });
 
-  const chatKeys = userChats.map((chat) => `chat:${chat.id}`);
+  type Chat = {
+    id: string;
+  };
+
+  const chatKeys = userChats.map((chat: Chat) => `chat:${chat.id}`);
   if (chatKeys.length > 0) {
     await redis?.del(chatKeys);
   }

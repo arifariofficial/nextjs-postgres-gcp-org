@@ -13,7 +13,7 @@ export function SidebarList() {
   const { data: session } = useSession();
 
   useEffect(() => {
-    async function fetchSessionAndLoadChats() {
+    function fetchSessionAndLoadChats() {
       if (session?.user.id) {
         loadChats(session.user.id);
       }
