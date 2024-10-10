@@ -8,9 +8,6 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat curl
 RUN apk add --no-cache bind-tools busybox-extras iputils
 
-# Update npm to the latest version
-RUN npm install -g npm@latest
-
 # Set the working directory
 WORKDIR /app
 
@@ -22,11 +19,15 @@ RUN npm install
 FROM base AS builder
 WORKDIR /app
 
+# Update npm to the latest version
+RUN npm install -g npm@latest
+
 # Copy node_modules from the deps stage
 COPY --from=deps /app/node_modules ./node_modules
 
 # Copy all project files
 COPY . .
+
 
 # Generate Prisma client
 RUN npx prisma generate
@@ -61,6 +62,8 @@ COPY --from=builder /app/prisma ./prisma
 
 # Switch to non-root user
 USER nextjs
+
+
 
 # Expose the application port
 EXPOSE 3000
