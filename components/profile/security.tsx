@@ -40,6 +40,10 @@ export default function Security() {
 
         await twoFactor(userId, newStatus);
       } catch (error) {
+        console.error(
+          "Failed to update two-factor authentication settings:",
+          error,
+        );
         setError("Failed to update two-factor authentication settings.");
         setIsTwoFactorEnabled(!newStatus);
       }

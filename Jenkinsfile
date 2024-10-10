@@ -21,7 +21,6 @@ pipeline {
             }
         }
 
-
         stage('Check Branch') {
             steps {
                 script {
@@ -60,7 +59,7 @@ pipeline {
                         docker image prune -f
 
                         # docker compose build and up
-                        docker-compose build
+                        # docker-compose build
                         docker-compose up -d
                     '''
                 }
