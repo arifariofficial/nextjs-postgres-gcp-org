@@ -1,5 +1,5 @@
 # Use the latest Node.js Alpine as the base image
-FROM node:lts-slim AS base
+FROM node:lts-alpine3.20 AS base
 
 # Use the base image to install dependencies
 FROM base AS deps
