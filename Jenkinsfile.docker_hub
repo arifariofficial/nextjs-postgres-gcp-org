@@ -25,23 +25,26 @@ pipeline {
                     echo "Deploying Docker image: ${DOCKER_REPO}:${DOCKER_TAG}"
 
                     sh '''
-                        # Navigate to the project directory
-                        cd /home/sipeai18/ariful-org-nextjs-prisma
+                        set -e
 
-                        # Pull latest changes from production
-                        git pull origin main
+                        echo "Navigating to the project directory..."
+                        cd ${PROJECT_PATH}
 
-                        # Bring down Docker containers
-                        docker-compose down
+                        echo "Pulling latest changes from production..."
+                        git pull origin main || echo "Git pull failed, please check your repository and permissions."
 
-                        # Clean up unused Docker resources
-                        docker system prune -f
-                        docker volume prune -f
-                        docker image prune -f
+                        echo "Bringing down Docker containers..."
+                        docker-compose down || echo "No containers are running."
 
-                        # docker compose build and up
-                        # docker-compose build
-                        docker-compose up -d
+                        echo "Cleaning up unused Docker resources..."
+                        docker system prune -f || true
+                        docker volume prune -f || true
+                        docker image prune -f || true
+
+                        echo "Building and starting Docker containers..."
+                        docker-compose up -d --build
+
+                        echo "Deployment completed for ${DOCKER_REPO}:${DOCKER_TAG}."
                     '''
                 }
             }
