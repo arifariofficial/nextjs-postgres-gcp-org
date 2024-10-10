@@ -16,7 +16,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
 
   return (
     <Button
-      className={cn(className, "w-full")}
+      className={cn(className)}
       variant="ghost"
       onClick={() => {
         startTransition(() => {
@@ -25,7 +25,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
       }}
     >
       <p className="text-2xl font-bold">Switch Theme</p>
-      <div>
+      <div className="mr-7">
         {!theme ? null : theme === "dark" ? (
           <IconMoon className="size-6 transition-all" />
         ) : (

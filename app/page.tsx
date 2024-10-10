@@ -1,19 +1,12 @@
-import Image from "next/image";
-import Sky from "@/public/images/sky.jpg";
+import BackgroundImage from "@/components/background-image";
 import { FaGithub } from "react-icons/fa";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center px-4 text-foreground transition-colors duration-300">
-      <Image
-        src={Sky}
-        alt="background-image"
-        fill={true}
-        objectFit="cover"
-        className="dark:hidden"
-      />
-      <div className="animate-fade-in max-w-3xl rounded-lg bg-background/60 p-8 text-card-foreground shadow-lg">
-        <h1 className="animate-fade-in mb-6 text-center text-5xl font-bold">
+    <div className="relative flex h-screen flex-col items-center justify-center text-foreground transition-colors duration-300">
+      <BackgroundImage />
+      <div className="mx-4 mt-[100px] max-w-3xl animate-fade-in rounded-lg bg-background/80 p-6 text-card-foreground shadow-lg">
+        <h1 className="mb-6 animate-fade-in text-center text-5xl font-bold">
           Welcome to <span className="text-foreground/70">ariful.org</span>
         </h1>
         <p className="text-center text-lg">
@@ -34,7 +27,7 @@ export default function Home() {
           <strong>Stripe</strong> handles payment processing. The CI/CD process
           is automated using <strong>Jenkins</strong>.
         </p>
-        <div className="animate-fade-in mt-6 flex justify-center delay-150">
+        <div className="mt-6 flex animate-fade-in justify-center delay-150">
           <a
             href="https://github.com/arifariofficial/ariful-org-nextjs-prisma"
             target="_blank"

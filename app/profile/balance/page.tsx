@@ -2,7 +2,7 @@ import Balance from "@/components/profile/balance";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "SIPE | Balance",
+  title: "Ariful | Balance",
   description: "Balance Settings",
   icons: "/favicon.ico",
 };
