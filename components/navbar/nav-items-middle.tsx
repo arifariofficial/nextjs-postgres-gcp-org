@@ -76,7 +76,7 @@ export function NavItemsMiddle({ className }: NavItemsMiddleProps) {
                         <Image
                           src={Pic1}
                           alt="Profile Pic"
-                          layout="intrinsic"
+                          fill
                           objectFit="cover"
                           className="-translate-y-2 scale-[220%] transform"
                         />
@@ -146,11 +146,12 @@ export function NavItemsMiddle({ className }: NavItemsMiddleProps) {
               legacyBehavior
               passHref
             >
-              <a target="_blank" rel="noopener noreferrer">
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Github
-                </NavigationMenuLink>
-              </a>
+              <NavigationMenuLink
+                className={navigationMenuTriggerStyle()}
+                target="_blank"
+              >
+                Github
+              </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
         </NavigationMenuList>

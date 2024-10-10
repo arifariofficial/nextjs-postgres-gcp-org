@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "analyze": "ANALYZE=true next build",
+    "build": "next build",
     "start": "node .next/standalone/server.js",
     "lint": "next lint",
     "scrape": "tsx scripts/scrape.ts",
