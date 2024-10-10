@@ -15,13 +15,26 @@ pipeline {
     }
 
     environment {
-        DOCKER_REPO = env.DOCKER_REPO ?: 'default-repo'
-        DOCKER_TAG = env.DOCKER_TAG ?: 'latest'
         PROJECT_PATH = '/home/sipeai18/ariful-org-nextjs-prisma'
     }
 
-
     stages {
+        stage('Initialize') {
+            steps {
+                script {
+                    // Set default values if they are not provided
+                    if (!env.DOCKER_REPO) {
+                        env.DOCKER_REPO = 'default-repo'
+                    }
+                    if (!env.DOCKER_TAG) {
+                        env.DOCKER_TAG = 'latest'
+                    }
+
+                    echo "DOCKER_REPO: ${DOCKER_REPO}"
+                    echo "DOCKER_TAG: ${DOCKER_TAG}"
+                }
+            }
+        }
         stage('Deploy Docker Image') {
             steps {
                 script {
