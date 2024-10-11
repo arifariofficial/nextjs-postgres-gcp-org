@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "docker": "docker system prune -f && docker build -t arifariofficial/ariful-org .",
-    "docker:push": "docker system prune -f && docker build -t arifariofficial/ariful-org . && docker push arifariofficial/ariful-org",
+    "docker-push": "docker system prune -f && docker build --platform linux/amd64 -t arifariofficial/ariful-org . && docker push arifariofficial/ariful-org",
     "analyze": "ANALYZE=true next build",
     "start": "next start",
     "lint": "next lint",
