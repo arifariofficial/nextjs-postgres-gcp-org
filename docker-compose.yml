@@ -5,7 +5,6 @@ services:
     #   dockerfile: Dockerfile.github
 
     # using docker registry
-    platform: linux/amd64
     image: arifariofficial/ariful-org
     environment:
       - NODE_ENV=production
