@@ -43,6 +43,7 @@ pipeline {
                     sh '''
                         set -e
                         cd ${PROJECT_PATH}
+                        git checkout main
                         git pull origin main || echo "Git pull failed, please check your repository and permissions."
 
                         docker-compose down || echo "No containers are running."
