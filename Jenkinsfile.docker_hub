@@ -51,25 +51,10 @@ pipeline {
                         docker system prune -f || true
                         docker volume prune -f || true
                         docker image prune -f || true
-                        docker-compose up -d
+                        docker compose up -d
 
                         echo "Deployment completed for ${DOCKER_REPO}:${DOCKER_TAG}."
                     '''
-                }
-            }
-        }
-        stage("DB migrate") {
-            steps {
-                script {
-                    echo "Pisma db push"
-
-                    sh '''
-                        set -e
-                        cd ${PROJECT_PATH}
-                        docker-compose exec frontend npx prisma db push
-
-                    '''
-
                 }
             }
         }
