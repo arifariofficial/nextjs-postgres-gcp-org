@@ -9,14 +9,14 @@ WORKDIR /usr/src/app
 
 # Copy package files and install dependencies using npm
 COPY package.json package-lock.json* ./
-RUN npm install 
+RUN npm install --production=false
 
 # Build the source code
 FROM base AS builder
 WORKDIR /usr/src/app
 
 # Copy node_modules from the deps stage
-COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /usr/src/app/node_modules ./node_modules
 
 # Copy all project files
 COPY . .
@@ -41,15 +41,15 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 # Copy necessary files and set permissions
-COPY --from=deps /app/node_modules ./node_modules
-COPY --from=builder /app/public ./public
+COPY --from=deps /usr/src/app/node_modules ./node_modules
+COPY --from=builder /usr/src/app/public ./public
 
 # Copy standalone and static Next.js build outputs
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /usr/src/app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /usr/src/app/.next/static ./.next/static
 
 # Copy Prisma schema
-COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /usr/src/app/prisma ./prisma
 
 # Switch to non-root user
 USER nextjs
