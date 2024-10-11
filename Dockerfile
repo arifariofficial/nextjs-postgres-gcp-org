@@ -1,11 +1,11 @@
 # Use the latest Node.js Alpine as the base image
-FROM node:lts-alpine3.20 AS base
+FROM node:lts-slim AS base
 
 # Use the base image to install dependencies
 FROM base AS deps
 
 # Set the working directory
-WORKDIR /app
+WORKDIR /usr/src/app
 
 # Copy package files and install dependencies using npm
 COPY package.json package-lock.json* ./
@@ -13,7 +13,7 @@ RUN npm install
 
 # Build the source code
 FROM base AS builder
-WORKDIR /app
+WORKDIR /usr/src/app
 
 # Copy node_modules from the deps stage
 COPY --from=deps /app/node_modules ./node_modules
@@ -29,7 +29,7 @@ RUN npm run build
 
 # Production image, copy all the necessary files
 FROM base AS runner
-WORKDIR /app
+WORKDIR /usr/src/app
 
 # Set environment variables
 ENV NODE_ENV=production
