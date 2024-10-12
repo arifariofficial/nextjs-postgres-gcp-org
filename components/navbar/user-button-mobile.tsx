@@ -66,7 +66,7 @@ export default function UserButtonMobile({
               asChild
               className="flex justify-between px-8"
             >
-              <Link className="" href="/about">
+              <Link className="" href="/aboutme">
                 <p className="text-2xl font-bold">About Me</p>
                 <IconAboutUs />
               </Link>
