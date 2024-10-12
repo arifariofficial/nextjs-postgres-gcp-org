@@ -7,9 +7,6 @@ pipeline {
             ],
             causeString: 'Triggered by Docker Hub webhook: $DOCKER_REPO',
             token: 'DOCKER_HUB',
-            printContributedVariables: true,
-            printPostContent: true,
-            silentResponse: false
         )
     }
 
@@ -27,7 +24,7 @@ pipeline {
                         git checkout main
                         git pull origin main 
                         docker compose down 
-                        docker compose up -d
+                        docker compose -f docker-compose.yml up -d
                         docker system prune -f
                         docker volume prune -f
                         docker image prune -f
