@@ -24,11 +24,12 @@ pipeline {
                         git checkout main
                         git pull origin main 
                         docker compose down
-                        docker compose pull frontend 
-                        docker compose -f docker-compose.yml up -d
+                        docker compose pull frontend
                         docker system prune -f
                         docker volume prune -f
-                        docker image prune -f
+                        docker image prune -f 
+                        docker compose up -d
+
                     '''
                 }
             }
