@@ -23,7 +23,8 @@ pipeline {
                         cd ${PROJECT_PATH}
                         git checkout main
                         git pull origin main 
-                        docker compose down 
+                        docker compose down
+                        docker compose pull frontend 
                         docker compose -f docker-compose.yml up -d
                         docker system prune -f
                         docker volume prune -f
