@@ -4,7 +4,6 @@ pipeline {
         GenericTrigger(
             genericVariables: [
                 [key: 'DOCKER_REPO', value: '$.repository.repo_name'],
-                [key: 'DOCKER_TAG', value: '$.push_data.tag']
             ],
             causeString: 'Triggered by Docker Hub webhook: $DOCKER_REPO:$DOCKER_TAG',
             token: 'DOCKER_HUB',
@@ -19,22 +18,6 @@ pipeline {
     }
 
     stages {
-        stage('Initialize') {
-            steps {
-                script {
-                    // Set default values if they are not provided
-                    if (!env.DOCKER_REPO) {
-                        env.DOCKER_REPO = 'default-repo'
-                    }
-                    if (!env.DOCKER_TAG) {
-                        env.DOCKER_TAG = 'latest'
-                    }
-
-                    echo "DOCKER_REPO: ${DOCKER_REPO}"
-                    echo "DOCKER_TAG: ${DOCKER_TAG}"
-                }
-            }
-        }
         stage('Deploy Docker Image') {
             steps {
                 script {
@@ -44,16 +27,12 @@ pipeline {
                         set -e
                         cd ${PROJECT_PATH}
                         git checkout main
-                        git pull origin main || echo "Git pull failed, please check your repository and permissions."
-
-                        docker compose down || echo "No containers are running."
-
-                        docker system prune -f || true
-                        docker volume prune -f || true
-                        docker image prune -f || true
+                        git pull origin main 
+                        docker compose down 
+                        docker system prune -f
+                        docker volume prune -f
+                        docker image prune -f
                         docker compose up -d
-
-                        echo "Deployment completed for ${DOCKER_REPO}:${DOCKER_TAG}."
                     '''
                 }
             }
