@@ -5,7 +5,7 @@ pipeline {
             genericVariables: [
                 [key: 'DOCKER_REPO', value: '$.repository.repo_name'],
             ],
-            causeString: 'Triggered by Docker Hub webhook: $DOCKER_REPO:$DOCKER_TAG',
+            causeString: 'Triggered by Docker Hub webhook: $DOCKER_REPO',
             token: 'DOCKER_HUB',
             printContributedVariables: true,
             printPostContent: true,
