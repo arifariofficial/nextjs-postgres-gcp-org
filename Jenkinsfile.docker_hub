@@ -46,7 +46,7 @@ pipeline {
                         git checkout main
                         git pull origin main || echo "Git pull failed, please check your repository and permissions."
 
-                        docker-compose down || echo "No containers are running."
+                        docker compose down || echo "No containers are running."
 
                         docker system prune -f || true
                         docker volume prune -f || true
