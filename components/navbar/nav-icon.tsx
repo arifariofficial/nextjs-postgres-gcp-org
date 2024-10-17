@@ -22,7 +22,7 @@ function NavIcon({ className }: NavIconProps) {
           />
           <AvatarFallback>Ari</AvatarFallback>
         </Avatar>
-        <div className="text-foreground">ARIFUL</div>
+        <div className="text-foreground hidden sm:flex">ARIFUL</div>
       </Link>
     </div>
   );

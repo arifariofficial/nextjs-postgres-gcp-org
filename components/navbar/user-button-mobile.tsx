@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { IconAboutUs, UserIcon } from "@/components/ui/icons";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Session } from "next-auth";
 import { ThemeToggle } from "@/components/theme-toggle-mobile";
@@ -17,7 +16,8 @@ import { Separator } from "@/components/ui/separator";
 import SignOutButtonMobile from "@/components/auth/signout-client-mobile";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import SignInButtonMobile from "../auth/signin-client-mobile";
-import { FaProjectDiagram } from "react-icons/fa";
+import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
+import { UserIcon } from "../ui/icons";
 
 interface UserButtonMobileProps {
   session: Session | null;
@@ -39,7 +39,11 @@ export default function UserButtonMobile({
             <HamburgerMenuIcon className="size-7" />
           </Button>
         </SheetTrigger>
-        <SheetContent className="inset-y-0 flex w-full flex-col justify-start sm:hidden">
+        <SheetContent className="inset-y-0 gap-1 flex w-full flex-col justify-start sm:hidden">
+        <DialogTitle className="sr-only">Mobile Navigation Menu</DialogTitle> 
+        <DialogDescription className="sr-only">
+            Navigate through the menu options using the buttons.
+          </DialogDescription>
           {session && (
             <SheetHeader className="flex w-full items-center justify-center">
               <Avatar className="size-28 border shadow-md">
@@ -59,45 +63,16 @@ export default function UserButtonMobile({
               </div>
             </SheetHeader>
           )}
-          {session && <Separator />}
-          <SheetClose asChild>
-            <Button
-              variant="ghost"
-              asChild
-              className="flex justify-between px-8"
-            >
-              <Link className="" href="/aboutme">
-                <p className="text-2xl font-bold">About Me</p>
-                <IconAboutUs />
-              </Link>
-            </Button>
-          </SheetClose>
-          <Separator />
-          <SheetClose asChild>
-            <Button
-              variant="ghost"
-              asChild
-              className="flex justify-between px-8"
-            >
-              <Link className="" href="/about">
-                <p className="text-2xl font-bold">Projects</p>
-                <FaProjectDiagram
-                  className="size-5"
-                  stroke="currentColor"
-                  fill="none"
-                  strokeWidth={40}
-                />
-              </Link>
-            </Button>
-          </SheetClose>
+
+          {/* { Account } */}
           {session && (
             <>
-              <Separator />
-              <SheetClose asChild>
+              <Separator/>
+              <SheetClose asChild className="h-[60px]">
                 <Button
                   variant="ghost"
                   asChild
-                  className="flex justify-between px-8"
+                  className="flex justify-between px-7"
                 >
                   <Link className="" href="/profile">
                     <p className="text-2xl font-bold">Account</p>
@@ -108,25 +83,29 @@ export default function UserButtonMobile({
             </>
           )}
           <Separator />
-          <SheetClose className="outline-none focus:outline-none focus-visible:outline-none">
-            <ThemeToggle className="ml-3 flex w-full justify-between outline-none focus:outline-none focus-visible:outline-none" />
+          
+            {/* { Switch theme } */}
+          <SheetClose className="hover:bg-accent w-full">
+            <ThemeToggle className="flex w-full h-[60px] items-center pt-4 justify-between px-7" variant="ghost" />
           </SheetClose>
           <Separator />
+          <div>
           {session ? (
-            <SheetClose>
+            <SheetClose asChild>
               <SignOutButtonMobile
-                className="flex size-full justify-between px-7"
+                className="flex w-full h-[60px] justify-between px-7"
                 variant="ghost"
               />
             </SheetClose>
           ) : (
-            <SheetClose>
+            <SheetClose asChild>
               <SignInButtonMobile
-                className="flex size-full justify-between px-7"
+                className="flex w-full h-[60px] justify-between px-7"
                 variant="ghost"
               />
             </SheetClose>
           )}
+          </div>
         </SheetContent>
       </Sheet>
     </div>
