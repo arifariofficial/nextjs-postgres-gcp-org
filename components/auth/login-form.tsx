@@ -36,6 +36,7 @@ interface LoginFormProps {
 
 export const LoginForm = ({ headerLabel }: LoginFormProps) => {
   const searchParams = useSearchParams();
+  const redirectUrl = searchParams.get("redirect") || "/";
   const urlError =
     searchParams.get("error") === "OAuthAccountNotLinked"
       ? "Email already in use with different provider"
@@ -51,11 +52,11 @@ export const LoginForm = ({ headerLabel }: LoginFormProps) => {
     const fetchSession = async () => {
       const session = await getSession();
       if (session) {
-        window.location.href = "/";
+        window.location.href = redirectUrl;
       }
     };
     fetchSession();
-  }, []);
+  }, [redirectUrl]);
 
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -78,7 +79,7 @@ export const LoginForm = ({ headerLabel }: LoginFormProps) => {
           } else if (result?.type === "success") {
             setSuccess(getMessageFromCode(result.resultCode));
             setTimeout(() => {
-              window.location.href = "/";
+              window.location.href = redirectUrl;
             }, 1000);
           } else if (result?.type === "twoFactor") {
             setShowTwoFactor(true);

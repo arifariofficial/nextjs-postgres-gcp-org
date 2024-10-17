@@ -5,7 +5,7 @@ import { SidebarDesktop } from "@/components/chat/sidebar-desktop";
 import { SidebarToggle } from "@/components/chat/sidebar-toggle";
 import { useSidebar } from "@/lib/hooks/use-sidebar";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface ChatLayoutProps {
@@ -17,6 +17,7 @@ export default function ChatLayout({ children }: ChatLayoutProps) {
   const [showModal, setShowModal] = useState(false);
   const { data: session } = useSession();
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     if (!session) {
@@ -26,7 +27,7 @@ export default function ChatLayout({ children }: ChatLayoutProps) {
 
   const handleModalClose = () => {
     setShowModal(false);
-    router.push("/auth/login");
+    router.push(`/auth/login?redirect=${encodeURIComponent(pathname)}`);
   };
 
   if (!session) {

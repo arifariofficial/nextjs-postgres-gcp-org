@@ -11,7 +11,6 @@ const AboutMe = () => {
           alt="Picture of Ariful Islam" 
           className="rounded-md shadow-xl"
           width={430}
-          height={160}
           priority={true} // Ensures image loads fast
         />
       <div className="m-2  h-full">

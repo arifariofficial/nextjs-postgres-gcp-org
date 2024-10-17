@@ -96,31 +96,31 @@ export function NavItemsMiddle({ className }: NavItemsMiddleProps) {
                   </NavigationMenuLink>
                 </li>
                 <li>
-                  <ListItem href="/docs" title="Skills">
+                  <ListItem href="/skills" title="Skills">
                     Re-usable components built using Radix UI and Tailwind CSS.
                   </ListItem>
                 </li>
                 <li>
-                  <ListItem href="/docs" title="Education">
+                  <ListItem href="/education" title="Education">
                     Re-usable components built using Radix UI and Tailwind CSS.
                   </ListItem>
                 </li>
                 <li>
                   <ListItem
-                    href="/docs/installation"
+                    href="/certification"
                     title="Courses and Certification"
                   >
                     How to install dependencies and structure your app.
                   </ListItem>
                 </li>
                 <li>
-                  <ListItem href="/docs/primitives/typography" title="Hobby">
+                  <ListItem href="/hobby" title="Hobby">
                     Styles for headings, paragraphs, lists...etc
                   </ListItem>
                 </li>
                 <li>
                   <ListItem
-                    href="/docs/primitives/typography"
+                    href="/experience"
                     title="Experience"
                   >
                     Styles for headings, paragraphs, lists...etc
