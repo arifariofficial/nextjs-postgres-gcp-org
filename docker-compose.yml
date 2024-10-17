@@ -2,8 +2,6 @@ services:
   frontend:
     platform: linux/amd64
     image: arifariofficial/ariful-org:latest
-    env_file:
-      - .env
     environment:
       - NODE_ENV=production
       - AUTH_URL=https://ariful.org

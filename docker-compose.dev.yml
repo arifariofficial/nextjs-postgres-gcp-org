@@ -1,15 +1,8 @@
 services:
   frontend:
     image: arifariofficial/ariful-org-dev:latest
-    environment:
-      - NODE_ENV=production
-      - AUTH_URL=http://localhost
-      - DATABASE_HOST=postgres
-      - DATABASE_USER=${POSTGRES_USER}
-      - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
-      - DATABASE_DB=${POSTGRES_DB}
-      - REDIS_HOST=${REDIS_URL}
-      - REDIS_PORT=6379
+    env_file:
+      - .env
     ports:
       - "3000:3000"
     networks:

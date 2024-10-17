@@ -34,3 +34,5 @@ docker-compose.yml
 # Build outputs
 build
 
+
+.env
