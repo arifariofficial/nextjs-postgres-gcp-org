@@ -4,15 +4,19 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "NEXT_DEBUG=true next build",
     "start": "next start",
-    "docker:dev": "docker system prune -f && docker build -t arifariofficial/ariful-org-dev . && docker push arifariofficial/ariful-org-dev:latest",
-    "docker:up": "docker-compose -f docker-compose.dev.yml pull frontend && docker-compose -f docker-compose.dev.yml up --build",
-    "docker:push": "docker build --platform linux/amd64 -t arifariofficial/ariful-org . && docker push arifariofficial/ariful-org:latest",
     "analyze": "ANALYZE=true next build",
     "lint": "next lint",
     "scrape": "tsx scripts/scrape.ts",
-    "embed": "tsx scripts/embed.ts"
+    "embed": "tsx scripts/embed.ts",
+    "docker:prune": "docker system prune -f && docker image prune -f & docker volume prune -f",    
+    "db-gen:dev": "npx prisma generate --schema=./prisma/schema.dev.prisma",
+    "db-gen:prod": "npx prisma generate --schema=./prisma/schema.prod.prisma",
+    "docker:dev": "docker build -f Dockerfile -t arifariofficial/ariful-org-dev . && docker push arifariofficial/ariful-org-dev:latest",
+    "docker:up": "docker-compose -f docker-compose.dev.yml up",
+    "docker:push": "npm run docker:prune && docker build --platform linux/amd64 -t arifariofficial/ariful-org . && docker push arifariofficial/ariful-org:latest",
+    "docker:deploy": "docker compose pull frontend && docker compose up"
   },
   "dependencies": {
     "@ai-sdk/openai": "^0.0.67",

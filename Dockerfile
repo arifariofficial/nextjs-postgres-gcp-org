@@ -1,4 +1,4 @@
-# Use an official Node.js runtime as a parent image
+# Use official Node.js runtime as a parent image with digest for security
 FROM node:22-alpine AS base
 
 # Set the working directory
@@ -13,28 +13,31 @@ FROM base AS deps
 # Copy package files first to leverage caching
 COPY package.json package-lock.json* ./
 
-# Install only production dependencies to optimize image size
-RUN npm ci 
+# Install dependencies without running scripts and with cache
+RUN npm install ci
 
 # Rebuild the source code only when needed
 FROM base AS builder
-WORKDIR /app
+
+# Copy dependencies from deps stage
+COPY --from=deps /app/node_modules ./node_modules
 
 # Copy package files again (only if they change)
 COPY package.json package-lock.json* ./
-# Install all dependencies (including devDependencies)
-RUN npm ci
 
 # Copy the rest of the project files
 COPY . .
 
-# Generate Prisma client
-RUN npx prisma generate
+# Copy the .env file (but it will be removed later)
+COPY .env .env
 
-# Build the application
-RUN npm run build
+# Generate Prisma client and build the application
+RUN npm run db-gen:prod && npm run build
 
-# Production image, copy all the necessary files and run next
+# Remove .env file after the build process
+RUN rm -f .env
+
+# Production image, minimal setup
 FROM base AS runner
 WORKDIR /app
 
@@ -43,16 +46,16 @@ ENV NODE_ENV=production
 ENV HOSTNAME="0.0.0.0"
 ENV PORT=3000
 
-# Create non-root user and group
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+# Create non-root user and group for better security
+RUN addgroup --system --gid 1001 nodejs \
+  && adduser --system --uid 1001 nextjs
 
-# Copy built app, production node_modules, and necessary files from deps and builder
+# Copy only the necessary files from deps and builder
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-COPY --from=builder /app/prisma ./prisma
+COPY --from=builder --chown=nextjs:nodejs /app/prisma ./prisma
 
 # Ensure proper permissions for prerender cache
 RUN mkdir -p .next && chown nextjs:nodejs .next
@@ -61,7 +64,7 @@ RUN mkdir -p .next && chown nextjs:nodejs .next
 USER nextjs
 
 # Expose the application port
-EXPOSE 3000
+EXPOSE $PORT
 
 # Set the default command to run the application
-CMD ["node", "server.js"]
+CMD ["npm", "start"]
