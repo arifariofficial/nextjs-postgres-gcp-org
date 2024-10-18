@@ -9,17 +9,16 @@ import { cn } from "@/lib/utils";
 interface ThemeToggleProps {
   className?: string;
   variant?:
-  | "nav"
-  | "outline"
-  | "default"
-  | "destructive"
-  | "secondary"
-  | "ghost"
-  | "link"
-  | null
-  | undefined;
+    | "nav"
+    | "outline"
+    | "default"
+    | "destructive"
+    | "secondary"
+    | "ghost"
+    | "link"
+    | null
+    | undefined;
 }
-
 
 export function ThemeToggle({ className, variant }: ThemeToggleProps) {
   const { setTheme, theme } = useTheme();
@@ -27,7 +26,7 @@ export function ThemeToggle({ className, variant }: ThemeToggleProps) {
 
   return (
     <Button
-    asChild
+      asChild
       className={cn(className)}
       variant={variant}
       onClick={() => {
@@ -36,17 +35,17 @@ export function ThemeToggle({ className, variant }: ThemeToggleProps) {
         });
       }}
     >
-    <div>
-      <p className="text-2xl font-bold h-full">Switch Theme</p>
       <div>
-        {!theme ? null : theme === "dark" ? (
-          <IconMoon className="size-6 transition-all" />
-        ) : (
-          <IconSun className="size-6 transition-all" />
-        )}
-        <span className="sr-only">Toggle theme</span>
+        <p className="h-full text-2xl font-bold">Switch Theme</p>
+        <div>
+          {!theme ? null : theme === "dark" ? (
+            <IconMoon className="size-6 transition-all" />
+          ) : (
+            <IconSun className="size-6 transition-all" />
+          )}
+          <span className="sr-only">Toggle theme</span>
+        </div>
       </div>
-    </div>
     </Button>
   );
 }

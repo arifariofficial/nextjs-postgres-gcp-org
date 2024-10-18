@@ -34,7 +34,7 @@
 # Generate Prisma client and build the application using BuildKit secrets
     RUN --mount=type=secret,id=dotenv \
     /bin/sh -c "cp /run/secrets/dotenv .env && \
-    npm run db-gen:prod && \
+    npm run db:prod && \
     npm run build && \
     find /app -name '.env' -delete"
 

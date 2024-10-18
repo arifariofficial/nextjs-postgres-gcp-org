@@ -1,8 +1,6 @@
-import Education from "@/components/about-me/education"
+import Education from "@/components/about-me/education";
 
 const EducationPage = () => {
-  return (
-    <Education />
-  )
-}
-export default EducationPage
+  return <Education />;
+};
+export default EducationPage;

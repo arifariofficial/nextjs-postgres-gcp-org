@@ -24,20 +24,20 @@ export function SidebarToggle() {
           Chat History
         </div>
         <Button
-        asChild
+          asChild
           variant="ghost"
           className="hover:bg-transparen size-7 h-96 bg-transparent p-0 text-foreground/50"
           onClick={() => {
             toggleSidebar();
           }}
         >
-          <div>          
-          {isSidebarOpen ? (
-            <ChevronLeft className="size-7" strokeWidth={4} />
-          ) : (
-            <ChevronRight className="size-7" strokeWidth={4} />
-          )}
-          <span className="sr-only">Toggle Sidebar</span>
+          <div>
+            {isSidebarOpen ? (
+              <ChevronLeft className="size-7" strokeWidth={4} />
+            ) : (
+              <ChevronRight className="size-7" strokeWidth={4} />
+            )}
+            <span className="sr-only">Toggle Sidebar</span>
           </div>
         </Button>
         <div

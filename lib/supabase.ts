@@ -15,5 +15,5 @@ console.log("Supabase URL: ", supabaseUrl);
 
 // Avoid logging the service role key for security reasons in production
 if (process.env.NODE_ENV !== "production") {
-  console.log("Supabase Service Role Key: ", supabaseServiceRoleKey);  // Only log in non-production
+  console.log("Supabase Service Role Key: ", supabaseServiceRoleKey); // Only log in non-production
 }

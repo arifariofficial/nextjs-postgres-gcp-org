@@ -16,7 +16,7 @@
     "db:push": "npx prisma db push --schema=./prisma/schema.dev.prisma",
     "docker:dev": "DOCKER_BUILDKIT=1 docker build --secret id=dotenv,src=.env -f Dockerfile -t arifariofficial/ariful-org-dev . && docker push arifariofficial/ariful-org-dev:latest",
     "docker:up": "docker-compose -f docker-compose.dev.yml pull frontend && docker-compose -f docker-compose.dev.yml up",
-    "docker:push": "npm run docker:prune && DOCKER_BUILDKIT=1 docker build --secret id=dotenv,src=.env --platform linux/amd64 -t arifariofficial/ariful-org . && docker push arifariofficial/ariful-org:latest",
+    "docker:push": "DOCKER_BUILDKIT=1 docker build --secret id=dotenv,src=.env --platform linux/amd64 -t arifariofficial/ariful-org . && docker push arifariofficial/ariful-org:latest",
     "docker:deploy": "docker compose pull frontend && docker compose up"
   },
   "dependencies": {

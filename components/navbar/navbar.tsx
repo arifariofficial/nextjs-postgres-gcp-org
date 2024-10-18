@@ -8,7 +8,7 @@ import { NavItemsMiddle } from "./nav-items-middle";
 export default async function NavBar() {
   const session = await auth();
   return (
-    <nav className="bg-backgroundNav sticky top-0 z-50 flex border-b border-b-foreground/10 text-foreground">
+    <nav className="bg-backgroundNav sticky top-0 z-50 flex border-b border-b-foreground/10">
       <Container className="flex h-14 items-center justify-between">
         <NavIcon className="ml-4" />
         <NavItemsMiddle className="hidden size-full items-center sm:flex sm:justify-end md:pr-7" />
