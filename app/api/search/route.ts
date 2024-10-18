@@ -6,7 +6,7 @@ export const POST = async (req: Request): Promise<Response> => {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 
   if (!supabaseUrl) {
-  throw new Error("supabaseUrl is required.");
+    throw new Error("supabaseUrl is required.");
   }
 
   try {

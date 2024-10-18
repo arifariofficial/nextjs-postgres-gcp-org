@@ -2,15 +2,8 @@ services:
   frontend:
     platform: linux/amd64
     image: arifariofficial/ariful-org:latest
-    environment:
-      - NODE_ENV=production
-      - AUTH_URL=https://ariful.org
-      - DATABASE_HOST=postgres
-      - DATABASE_USER=${POSTGRES_USER}
-      - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
-      - DATABASE_DB=${POSTGRES_DB}
-      - REDIS_HOST=${REDIS_URL}
-      - REDIS_PORT=6379
+    env_file:
+      - .env
     networks:
       - ariful-network
     restart: unless-stopped

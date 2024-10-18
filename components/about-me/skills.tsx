@@ -1,14 +1,18 @@
 const Skills = () => {
   return (
     <div>
-      <section className="flex px-8 min-h-screen flex-col items-center py-12 bg-foreground/5">
-        <h2 className="text-4xl font-bold text-foreground/80 mb-8 animate-fadeInUp">My Skills</h2>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl">
+      <section className="flex min-h-screen flex-col items-center bg-foreground/5 px-8 py-12">
+        <h2 className="animate-fadeInUp mb-8 text-4xl font-bold text-foreground/80">
+          My Skills
+        </h2>
+
+        <div className="grid w-full max-w-6xl grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {/* Frontend Skills */}
-          <div className="bg-background shadow-lg rounded-lg p-6 hover:shadow-2xl transition-transform transform hover:-translate-y-2">
-            <h3 className="text-2xl font-semibold dark:text-foreground text-indigo-600 mb-4">Frontend</h3>
-            <ul className="list-disc ml-4 text-foreground">
+          <div className="transform rounded-lg bg-background p-6 shadow-lg transition-transform hover:-translate-y-2 hover:shadow-2xl">
+            <h3 className="mb-4 text-2xl font-semibold text-indigo-600 dark:text-foreground">
+              Frontend
+            </h3>
+            <ul className="ml-4 list-disc text-foreground">
               <li>HTML, CSS, Tailwind</li>
               <li>JavaScript, TypeScript</li>
               <li>React.js, Redux, Context API</li>
@@ -19,9 +23,11 @@ const Skills = () => {
           </div>
 
           {/* Backend Skills */}
-          <div className="bg-background shadow-lg rounded-lg p-6 hover:shadow-2xl transition-transform transform hover:-translate-y-2">
-            <h3 className="text-2xl font-semibold dark:text-foreground text-indigo-600 mb-4">Backend</h3>
-            <ul className="list-disc ml-4 text-foreground">
+          <div className="transform rounded-lg bg-background p-6 shadow-lg transition-transform hover:-translate-y-2 hover:shadow-2xl">
+            <h3 className="mb-4 text-2xl font-semibold text-indigo-600 dark:text-foreground">
+              Backend
+            </h3>
+            <ul className="ml-4 list-disc text-foreground">
               <li>Express.js, Node.js</li>
               <li>Java</li>
               <li>Spring Boot</li>
@@ -31,9 +37,11 @@ const Skills = () => {
           </div>
 
           {/* Frameworks */}
-          <div className="bg-background shadow-lg rounded-lg p-6 hover:shadow-2xl transition-transform transform hover:-translate-y-2">
-            <h3 className="text-2xl font-semibold dark:text-foreground text-indigo-600 mb-4">Frameworks</h3>
-            <ul className="list-disc ml-4 text-foreground">
+          <div className="transform rounded-lg bg-background p-6 shadow-lg transition-transform hover:-translate-y-2 hover:shadow-2xl">
+            <h3 className="mb-4 text-2xl font-semibold text-indigo-600 dark:text-foreground">
+              Frameworks
+            </h3>
+            <ul className="ml-4 list-disc text-foreground">
               <li>React.js, Next.js, React Native</li>
               <li>Node.js, Nest.js</li>
               <li>Spring Boot</li>
@@ -44,9 +52,11 @@ const Skills = () => {
           </div>
 
           {/* DevOps & Databases */}
-          <div className="bg-background shadow-lg rounded-lg p-6 hover:shadow-2xl transition-transform transform hover:-translate-y-2">
-            <h3 className="text-2xl font-semibold dark:text-foreground text-indigo-600 mb-4">DevOps & Databases</h3>
-            <ul className="list-disc ml-4 text-foreground">
+          <div className="transform rounded-lg bg-background p-6 shadow-lg transition-transform hover:-translate-y-2 hover:shadow-2xl">
+            <h3 className="mb-4 text-2xl font-semibold text-indigo-600 dark:text-foreground">
+              DevOps & Databases
+            </h3>
+            <ul className="ml-4 list-disc text-foreground">
               <li>CI/CD, Docker, Kubernetes</li>
               <li>Google Cloud Platform, Azure</li>
               <li>PostgreSQL, MongoDB</li>
@@ -55,9 +65,11 @@ const Skills = () => {
           </div>
 
           {/* Programming Languages */}
-          <div className="bg-background shadow-lg rounded-lg p-6 hover:shadow-2xl transition-transform transform hover:-translate-y-2">
-            <h3 className="text-2xl font-semibold dark:text-foreground text-indigo-600 mb-4">Programming Languages</h3>
-            <ul className="list-disc ml-4 text-foreground">
+          <div className="transform rounded-lg bg-background p-6 shadow-lg transition-transform hover:-translate-y-2 hover:shadow-2xl">
+            <h3 className="mb-4 text-2xl font-semibold text-indigo-600 dark:text-foreground">
+              Programming Languages
+            </h3>
+            <ul className="ml-4 list-disc text-foreground">
               <li>JavaScript, TypeScript</li>
               <li>Python, Java</li>
               <li>C, C++</li>
@@ -66,9 +78,11 @@ const Skills = () => {
           </div>
 
           {/* Systems & Networking */}
-          <div className="bg-background shadow-lg rounded-lg p-6 hover:shadow-2xl transition-transform transform hover:-translate-y-2">
-            <h3 className="text-2xl font-semibold dark:text-foreground text-indigo-600 mb-4">Systems & Networking</h3>
-            <ul className="list-disc ml-4 text-foreground">
+          <div className="transform rounded-lg bg-background p-6 shadow-lg transition-transform hover:-translate-y-2 hover:shadow-2xl">
+            <h3 className="mb-4 text-2xl font-semibold text-indigo-600 dark:text-foreground">
+              Systems & Networking
+            </h3>
+            <ul className="ml-4 list-disc text-foreground">
               <li>Linux Server, Windows Server</li>
               <li>Bash, TCP/IP, DNS, DHCP</li>
               <li>VMware ESXi, Cloud & Virtualization</li>
@@ -77,9 +91,11 @@ const Skills = () => {
           </div>
 
           {/* Mobile Development */}
-          <div className="bg-background shadow-lg rounded-lg p-6 hover:shadow-2xl transition-transform transform hover:-translate-y-2">
-            <h3 className="text-2xl font-semibold dark:text-foreground text-indigo-600 mb-4">Mobile Development</h3>
-            <ul className="list-disc ml-4 text-foreground">
+          <div className="transform rounded-lg bg-background p-6 shadow-lg transition-transform hover:-translate-y-2 hover:shadow-2xl">
+            <h3 className="mb-4 text-2xl font-semibold text-indigo-600 dark:text-foreground">
+              Mobile Development
+            </h3>
+            <ul className="ml-4 list-disc text-foreground">
               <li>React Native</li>
               <li>Flutter</li>
               <li>Swift, iOS Development</li>
@@ -88,9 +104,11 @@ const Skills = () => {
           </div>
 
           {/* Testing & Others */}
-          <div className="bg-background shadow-lg rounded-lg p-6 hover:shadow-2xl transition-transform transform hover:-translate-y-2">
-            <h3 className="text-2xl font-semibold dark:text-foreground text-indigo-600 mb-4">Testing & Others</h3>
-            <ul className="list-disc ml-4 text-foreground">
+          <div className="transform rounded-lg bg-background p-6 shadow-lg transition-transform hover:-translate-y-2 hover:shadow-2xl">
+            <h3 className="mb-4 text-2xl font-semibold text-indigo-600 dark:text-foreground">
+              Testing & Others
+            </h3>
+            <ul className="ml-4 list-disc text-foreground">
               <li>Jest, Cypress</li>
               <li>GraphQL, RESTful API</li>
               <li>Unit Testing</li>

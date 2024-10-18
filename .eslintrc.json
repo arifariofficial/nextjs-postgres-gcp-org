@@ -5,14 +5,10 @@
     "plugin:@typescript-eslint/recommended",
     "next/core-web-vitals",
     "next/typescript",
-    "plugin:prettier/recommended" // Add this line
+    "plugin:prettier/recommended"
   ],
-  "plugins": [
-    "@typescript-eslint",
-    "prettier" // Add this line
-  ],
+  "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
-    "prettier/prettier": "error" // Add this line
-    // Add any custom rules here
+    "prettier/prettier": "warn"
   }
 }
