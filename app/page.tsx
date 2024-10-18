@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className="relative flex h-screen flex-col items-center justify-center text-foreground transition-colors duration-300">
       <BackgroundImage />
-      <div className="mx-4 mt-[100px] max-w-3xl animate-fade-in rounded-lg bg-background/70 p-6 text-card-foreground shadow-lg">
+      <div className="mx-12 mt-[100px] max-w-3xl animate-fade-in rounded-lg bg-background/70 p-6 text-card-foreground shadow-lg">
         <h1 className="mb-6 animate-fade-in text-center text-5xl font-bold">
           Welcome to <span className="text-foreground/70">ariful.org</span>
         </h1>
