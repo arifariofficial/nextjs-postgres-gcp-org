@@ -27,6 +27,7 @@ const config = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         foregroundNav: "hsl(var(--foreground-nav))",
+        backgroundNav: "hsl(var(--background-nav))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",

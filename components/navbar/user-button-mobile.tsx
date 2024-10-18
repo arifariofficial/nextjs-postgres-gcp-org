@@ -35,13 +35,13 @@ export default function UserButtonMobile({
           asChild
           className="flex min-w-0 items-center justify-center px-2"
         >
-          <Button variant="nav" className={cn(className, "mr-1 h-full")}>
+          <Button variant="nav" className={cn(className, "mr-1")}>
             <HamburgerMenuIcon className="size-7" />
           </Button>
         </SheetTrigger>
-        <SheetContent className="inset-y-0 gap-1 flex w-full flex-col justify-start sm:hidden">
-        <DialogTitle className="sr-only">Mobile Navigation Menu</DialogTitle> 
-        <DialogDescription className="sr-only">
+        <SheetContent className="inset-y-0 flex max-h-screen w-full flex-col justify-start gap-1 sm:hidden">
+          <DialogTitle className="sr-only">Mobile Navigation Menu</DialogTitle>
+          <DialogDescription className="sr-only">
             Navigate through the menu options using the buttons.
           </DialogDescription>
           {session && (
@@ -67,7 +67,7 @@ export default function UserButtonMobile({
           {/* { Account } */}
           {session && (
             <>
-              <Separator/>
+              <Separator />
               <SheetClose asChild className="h-[60px]">
                 <Button
                   variant="ghost"
@@ -80,31 +80,34 @@ export default function UserButtonMobile({
                   </Link>
                 </Button>
               </SheetClose>
+              <Separator />
             </>
           )}
-          <Separator />
-          
-            {/* { Switch theme } */}
-          <SheetClose className="hover:bg-accent w-full">
-            <ThemeToggle className="flex w-full h-[60px] items-center pt-4 justify-between px-7" variant="ghost" />
+
+          {/* { Switch theme } */}
+          <SheetClose className="w-full hover:bg-accent">
+            <ThemeToggle
+              className="flex h-[60px] w-full items-center justify-between px-7 pt-4 outline-none focus:outline-none focus-visible:outline-none"
+              variant="ghost"
+            />
           </SheetClose>
           <Separator />
           <div>
-          {session ? (
-            <SheetClose asChild>
-              <SignOutButtonMobile
-                className="flex w-full h-[60px] justify-between px-7"
-                variant="ghost"
-              />
-            </SheetClose>
-          ) : (
-            <SheetClose asChild>
-              <SignInButtonMobile
-                className="flex w-full h-[60px] justify-between px-7"
-                variant="ghost"
-              />
-            </SheetClose>
-          )}
+            {session ? (
+              <SheetClose asChild>
+                <SignOutButtonMobile
+                  className="flex h-[60px] w-full justify-between px-7"
+                  variant="ghost"
+                />
+              </SheetClose>
+            ) : (
+              <SheetClose asChild>
+                <SignInButtonMobile
+                  className="flex h-[60px] w-full justify-between px-7"
+                  variant="ghost"
+                />
+              </SheetClose>
+            )}
           </div>
         </SheetContent>
       </Sheet>

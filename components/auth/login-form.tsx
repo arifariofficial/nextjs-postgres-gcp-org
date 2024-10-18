@@ -147,15 +147,16 @@ export const LoginForm = ({ headerLabel }: LoginFormProps) => {
                           size="small"
                           id="email"
                           label="Email Address"
-                          autoFocus
-                          autoComplete="current-email"
+                          name="email"
                           value={value}
                           onChange={onChange}
                           onBlur={onBlur}
-                          ref={ref}
-                          InputLabelProps={{
-                            shrink: true,
-                            className: "dark:text-white",
+                          inputRef={ref}
+                          slotProps={{
+                            inputLabel: {
+                              shrink: true,
+                              className: value ? "MuiFormLabel-filled" : "",
+                            },
                           }}
                           error={
                             form.getFieldState("email").isTouched &&
@@ -194,9 +195,29 @@ export const LoginForm = ({ headerLabel }: LoginFormProps) => {
                           ref={ref}
                           type={showPassword ? "text" : "password"}
                           autoComplete="current-password"
-                          InputLabelProps={{
-                            shrink: true,
-                            className: "dark:text-white",
+                          slotProps={{
+                            inputLabel: {
+                              shrink: true,
+                              className: value ? "MuiFormLabel-filled" : "",
+                            },
+                            input: {
+                              endAdornment: (
+                                <InputAdornment position="end">
+                                  <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={() =>
+                                      setShowPassword(!showPassword)
+                                    }
+                                  >
+                                    {showPassword ? (
+                                      <VisibilityIcon />
+                                    ) : (
+                                      <VisibilityOffIcon />
+                                    )}
+                                  </IconButton>
+                                </InputAdornment>
+                              ),
+                            },
                           }}
                           error={
                             form.getFieldState("password").isTouched &&
@@ -208,22 +229,6 @@ export const LoginForm = ({ headerLabel }: LoginFormProps) => {
                               ? form.formState.errors.password.message
                               : null
                           }
-                          InputProps={{
-                            endAdornment: (
-                              <InputAdornment position="end">
-                                <IconButton
-                                  aria-label="toggle password visibility"
-                                  onClick={() => setShowPassword(!showPassword)}
-                                >
-                                  {showPassword ? (
-                                    <VisibilityIcon />
-                                  ) : (
-                                    <VisibilityOffIcon />
-                                  )}
-                                </IconButton>
-                              </InputAdornment>
-                            ),
-                          }}
                         />
                       </FormControl>
                       <Button

@@ -5,7 +5,7 @@ import JurrasicRock from "public/images/jurrrsic_rock.jpg";
 
 const Hobbies = () => {
   return (
-    <div className="mt-[50px] flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center pt-20 dark:bg-foreground/5">
       <h2 className="self-center text-3xl font-bold">Hobbies</h2>
       <section className="mx-auto mt-[50px] flex max-w-screen-lg flex-col-reverse justify-center gap-10 px-8 sm:flex-row lg:gap-20">
         <div className="mb-10 sm:w-[50%]">
@@ -24,15 +24,15 @@ const Hobbies = () => {
               </figcaption>
             </figure>
             <p className="mb-4 text-lg text-foreground dark:text-muted-foreground">
-              In 2018, I went to Tomorrowland, and that’s when I got inspired to
-              produce EDM music. Ever since, I’ve been learning to make music,
-              and I truly enjoy it besides coding.
+              In 2018, I went to Tomorrowland, and it sparked my inspiration to
+              produce EDM music. Since then, I&apos;ve been learning the craft
+              and thoroughly enjoy it alongside coding.
             </p>
           </div>
 
           <p className="text-lg text-foreground dark:text-muted-foreground">
-            I have many favorite artists, but some of the top ones are Avicii,
-            Calvin Harris, Fisher and many more. 🎶
+            I have many favorite artists, but some of my top picks are Avicii,
+            Calvin Harris, Fisher, and many more. 🎶
           </p>
           {/* Tomorrowland - Image */}
           <figure className="mb-6 mt-8">
@@ -56,17 +56,18 @@ const Hobbies = () => {
         {/* Right Side - Text */}
         <div className="px-4 text-left sm:w-[50%]">
           <p className="mb-4 text-lg text-foreground dark:text-muted-foreground">
-            In high school, I tried to learn guitar to impress girls, but then I
-            found a better way to do it 😉
+            When i was in high school, I tried to learn guitar to impress girls,
+            but then I found a better way to do it 😉
           </p>
           <p className="mb-4 text-lg text-foreground dark:text-muted-foreground">
-            Joking.. 😋 I love playing guitar and try to learn new cover when i
-            have free times. My favorite song to play on guitar is Ayo
-            Technology by Milow.
+            Joking.. 😋 I love playing guitar and enjoy learning new covers
+            whenever I have free time. My favorite song to play is &apos;Ayo
+            Technology&apos; by Milow, and I&apos;m always looking for the next
+            great track to master.
           </p>
           <p className="mb-4 text-lg text-foreground dark:text-muted-foreground">
-            I enjoy playing guiar when i hang out with my friends and family and
-            have good time.
+            I enjoy playing guitar when hanging out with friends and family,
+            creating good times and lasting memories.
           </p>
 
           <div className="">

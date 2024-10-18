@@ -14,15 +14,16 @@ function NavIcon({ className }: NavIconProps) {
         href="/"
         className="flex items-center gap-2 p-3 font-serif text-xl font-semibold"
       >
-        <Avatar>
+        <Avatar className="relative overflow-hidden rounded-full border border-transparent shadow-lg before:absolute before:inset-0 before:animate-pulse before:rounded-full before:ring-2 before:ring-blue-500 before:ring-offset-4 before:ring-offset-transparent before:content-['']">
           <AvatarImage
             src={Pic2.src}
             alt="Ari's pic"
-            className="transfrom 0 translate-x-1 translate-y-3 scale-[300%] border shadow-md"
+            className="translate-x-1 translate-y-3 scale-[300%] transform shadow-md"
           />
           <AvatarFallback>Ari</AvatarFallback>
         </Avatar>
-        <div className="text-foreground hidden sm:flex">ARIFUL</div>
+
+        <div className="hidden text-foreground sm:flex">ARIFUL</div>
       </Link>
     </div>
   );

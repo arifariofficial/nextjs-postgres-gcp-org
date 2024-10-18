@@ -15,7 +15,6 @@ import {
 import { ListItem } from "./list-item";
 import NavAboutMe from "./nav-about-me";
 
-
 const components: { title: string; href: string; description: string }[] = [
   {
     title: "RAG Application",
@@ -99,5 +98,3 @@ export function NavItemsMiddle({ className }: NavItemsMiddleProps) {
     </div>
   );
 }
-
-

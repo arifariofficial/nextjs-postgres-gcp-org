@@ -12,6 +12,7 @@ body,
   :root {
     --background: 0 0% 100%;
     --foreground: 0 0% 0%;
+    --background-nav: 0 0% 100%;
     --foreground-nav: 0 0% 100%;
 
     --card: 0 0% 100%;
@@ -46,6 +47,7 @@ body,
   .dark {
     --background: 0 0% 12%;
     --foreground: 0 0% 100%;
+    --background-nav: 0 0% 12%;
     --foreground-nav: 0 0 100%;
 
     --card: 240 6% 10%;
