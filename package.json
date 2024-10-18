@@ -12,7 +12,6 @@
     "embed": "tsx scripts/embed.ts",
     "docker:prune": "docker system prune -f && docker image prune -f && docker volume prune -f",
     "db:dev": "npx prisma generate --schema=./prisma/schema.dev.prisma",
-    "db:prod": "npx prisma generate --schema=./prisma/schema.prod.prisma",
     "db:push": "npx prisma db push --schema=./prisma/schema.dev.prisma",
     "docker:dev": "DOCKER_BUILDKIT=1 docker build --secret id=dotenv,src=.env -f Dockerfile -t arifariofficial/ariful-org-dev . && docker push arifariofficial/ariful-org-dev:latest",
     "docker:up": "docker-compose -f docker-compose.dev.yml pull frontend && docker-compose -f docker-compose.dev.yml up",

@@ -31,10 +31,10 @@
     # Copy the rest of the project files, excluding .env via .dockerignore
     COPY . .
     
-# Generate Prisma client and build the application using BuildKit secrets
+    # Generate Prisma client and build the application using BuildKit secrets
     RUN --mount=type=secret,id=dotenv \
     /bin/sh -c "cp /run/secrets/dotenv .env && \
-    npm run db:prod && \
+    npx prisma generate && \
     npm run build && \
     find /app -name '.env' -delete"
 
@@ -61,6 +61,7 @@
     COPY --from=build --chown=nextjs:nodejs /app/.next/static ./.next/static
     COPY --from=build --chown=nextjs:nodejs /app/public ./public
     COPY --from=build --chown=nextjs:nodejs /app/package.json ./package.json
+    COPY --from=build --chown=nextjs:nodejs /app/prisma ./prisma
     
     # Ensure proper permissions for prerender cache
     RUN mkdir -p .next && chown nextjs:nodejs .next
