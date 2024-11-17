@@ -26,7 +26,6 @@ pipeline {
                         docker compose down
                         docker compose pull frontend
                         docker system prune -f
-                        docker volume prune -f
                         docker image prune -f 
                         docker compose up -d
 
