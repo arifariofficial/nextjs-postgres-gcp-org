@@ -4,7 +4,7 @@
   become: true
   vars:
     # Set the release codename for Debian
-    release_codename: bullseye
+    release_codename: bookworm
 
   tasks:
     # Update apt repository cache
@@ -24,6 +24,7 @@
           - git
           - gnupg
           - lsb-release
+          - iputils-ping
         state: present
         update_cache: yes
 
@@ -42,48 +43,23 @@
       debug:
         msg: "Java Version Installed: {{ java_version_output.stderr_lines }}"
 
-    # Ensure keyrings directory exists
-    - name: Create keyrings directory
-      file:
-        path: /etc/apt/keyrings
-        state: directory
-        mode: "0755"
-
-    # Add Docker repository
-    - name: Add Docker repository
-      copy:
-        dest: /etc/apt/sources.list.d/docker.list
-        content: |
-          deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian {{ release_codename }} stable
-
-    # Add Docker GPG Key
-    - name: Add Docker GPG Key
-      shell: |
-        curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-      args:
-        creates: /etc/apt/keyrings/docker.gpg
-
-    # Update APT cache
-    - name: Update APT cache
+    # Update ca-certificates
+    - name: Update ca-certificates
       apt:
+        name: ca-certificates
+        state: latest
         update_cache: yes
         force_apt_get: yes
 
-    # Install Docker Engine
-    - name: Install Docker Engine
+    # Install Docker components from Debian repository
+    - name: Install Docker components
       apt:
         name:
-          - docker-ce
-          - docker-ce-cli
-          - containerd.io
+          - docker.io
+          - docker-compose
         state: latest
-
-    # Add user to Docker group
-    - name: Add user to the Docker group
-      user:
-        name: "{{ ansible_user }}"
-        groups: docker
-        append: yes
+        update_cache: yes
+      register: docker_install_result
 
     # Enable and start Docker service
     - name: Enable and start Docker service
@@ -91,6 +67,28 @@
         name: docker
         enabled: yes
         state: started
+
+    # Check if Docker group exists
+    - name: Check if Docker group exists
+      ansible.builtin.getent:
+        database: group
+        key: docker
+      register: docker_group
+
+    # Create Docker group if it doesn't exist
+    - name: Create Docker group
+      ansible.builtin.group:
+        name: docker
+        state: present
+      when: docker_group.failed is defined and docker_group.failed
+
+    # Add user to Docker group
+    - name: Add user to the Docker group
+      user:
+        name: "{{ ansible_user }}"
+        groups: docker
+        append: yes
+      when: docker_group.failed is not defined or not docker_group.failed
 
     # Install Docker Compose
     - name: Download Docker Compose
@@ -108,7 +106,7 @@
         msg: "{{ docker_compose_version.stdout }}"
 
 - name: Set up Jenkins with custom user
-  hosts: all
+  hosts: gcp-vm
   become: yes
   vars:
     jenkins_user: "sipeai8" # Change Jenkins user to sipeai8
@@ -186,105 +184,26 @@
         groups: docker
         append: yes
 
-    # Install GitLab dependencies
-    - name: Install GitLab dependencies
-      apt:
-        name:
-          - curl
-          - tzdata
-          - openssh-server
-        state: present
-
-    # Download GitLab GPG key
-    - name: Download GitLab GPG key and store in keyrings
-      shell: |
-        curl -fsSL https://packages.gitlab.com/gitlab/gitlab-ce/gpgkey | gpg --dearmor -o /etc/apt/keyrings/gitlab.gpg
-      args:
-        creates: /etc/apt/keyrings/gitlab.gpg
-
-    # Add GitLab repository
-    - name: Add GitLab repository
-      copy:
-        dest: /etc/apt/sources.list.d/gitlab-ce.list
-        content: |
-          deb [signed-by=/etc/apt/keyrings/gitlab.gpg] https://packages.gitlab.com/gitlab/gitlab-ce/debian/ bullseye main
-
-    # Update APT cache
-    - name: Update APT cache
-      apt:
-        update_cache: yes
-        force_apt_get: yes
-
-    # Install GitLab
-    - name: Install GitLab CE
-      apt:
-        name: gitlab-ce
-        state: present
-        force_apt_get: yes
-        allow_unauthenticated: no
-      environment:
-        DEBIAN_FRONTEND: noninteractive
-
-    - name: Install glab CLI
-      shell: |
-        curl -fsSL https://raw.githubusercontent.com/profclems/glab/trunk/scripts/install.sh | bash
-      args:
-        creates: /usr/bin/glab
-
-    # Reconfigure GitLab
-    - name: Reconfigure GitLab
-      command: gitlab-ctl reconfigure
-      args:
-        creates: /etc/gitlab/gitlab.rb
-
-# Install pexpect library
-- name: Install pexpect library
-  hosts: all
-  become: true
+# Install Git and Clone Repository
+- name: Install Git
+  hosts: gcp-vm
+  become: yes
   tasks:
-    # Step 1: Ensure Python and pip are installed
-    - name: Ensure Python 3 and pip are installed
+    - name: Install Git
       apt:
-        name:
-          - python3
-          - python3-pip
+        name: git
         state: present
         update_cache: yes
 
-    # Step 2: Install the pexpect library
-    - name: Install pexpect
-      pip:
-        name: pexpect
-        executable: pip3
-
-# Galb CLI Authentication
-- name: Authenticate glab CLI
-  hosts: all
-  become: true
-  become_user: sipeai8 # Switch to the sipeai8 user
-  tasks:
-    - name: Debug .env variables
-      debug:
-        msg: "The personal access token is {{ PERSONAL_ACCESS_TOKEN }}"
-
-    - name: Log in to glab CLI non-interactively
-      shell: glab auth login --hostname gitlab.com --token "{{ PERSONAL_ACCESS_TOKEN }}"
-      register: glab_auth_result
-
-    - name: Print Authentication Result
-      debug:
-        msg: "glab Authentication Result: {{ glab_auth_result.stdout }}"
-
-    #  Clone the repository
     - name: Clone the repository
-      shell: |
-        git clone https://oauth2:{{ PERSONAL_ACCESS_TOKEN }}@gitlab.com/sipe3/sipe-frontend.git /home/{{ ansible_user }}/sipe-frontend
+      git:
+        repo: https://github.com/arifariofficial/nextjs-postgres-gcp-org.git
+        dest: /home/sipeai8/nextjs-postgres-gcp-org
 
 # Git identity configuration
 - name: Configure Git user settings
-  hosts: all
+  hosts: gcp-vm
   become: yes
-  become_user: sipeai8 # Switch to the sipeai8 user
   vars:
     git_user_email: "ariful6@yahoo.com"
     git_user_name: "Ariful Islam"
