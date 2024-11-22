@@ -216,6 +216,7 @@
 - name: Install Git
   hosts: gcp-vm
   become: yes
+  become user: sipeai8
   tasks:
     - name: Install Git
       apt:

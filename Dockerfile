@@ -31,12 +31,12 @@
     # Copy the rest of the project files, excluding .env via .dockerignore
     COPY . .
     
-    # Generate Prisma client and build the application using BuildKit secrets
-    RUN --mount=type=secret,id=dotenv \
-    /bin/sh -c "cp /run/secrets/dotenv .env && \
-    npx prisma generate && \
-    npm run build && \
-    find /app -name '.env' -delete"
+ 
+    # Generate Prisma client
+    RUN npx prisma generate
+
+    # Build the application
+    RUN npm run build
 
     
     # ================================
