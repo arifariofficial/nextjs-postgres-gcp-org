@@ -11,7 +11,7 @@ pipeline {
     }
 
     environment {
-        PROJECT_PATH = '/home/sipeai18/ariful-org-nextjs-prisma'
+        PROJECT_PATH = '/home/sipeai8/ariful-org-nextjs-prisma'
     }
 
     stages {
