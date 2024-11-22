@@ -100,10 +100,38 @@
     - name: Verify Docker Compose installation
       shell: docker-compose --version
       register: docker_compose_version
+      failed_when: "'Docker Compose' not in docker_compose_version.stdout"
 
     - name: Print Docker Compose version
       debug:
-        msg: "{{ docker_compose_version.stdout }}"
+        msg: "Docker Compose version: {{ docker_compose_version.stdout }}"
+
+    - name: Remove existing Docker Compose file if it exists
+      file:
+        path: /usr/bin/docker-compose
+        state: absent
+      when: ansible_facts['os_family'] == 'Debian'
+
+    - name: Create symbolic link for Docker Compose
+      file:
+        src: /usr/local/bin/docker-compose
+        dest: /usr/bin/docker-compose
+        state: link
+
+    - name: Ensure Docker Compose is executable
+      file:
+        path: /usr/local/bin/docker-compose
+        mode: "0755"
+        state: file
+
+    - name: Confirm Docker Compose is installed
+      shell: docker-compose --version
+      register: confirm_version
+      changed_when: false
+
+    - name: Output confirmation of Docker Compose installation
+      debug:
+        msg: "Docker Compose successfully installed: {{ confirm_version.stdout }}"
 
 - name: Set up Jenkins with custom user
   hosts: gcp-vm
